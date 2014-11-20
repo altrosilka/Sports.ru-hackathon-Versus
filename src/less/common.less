@@ -1,0 +1,70 @@
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  font-size: 13px;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
+  background-color: #fff;
+  > header {
+    @headerHeight: 36px;
+    height: @headerHeight;
+    background: #000;
+    .logo {
+      height: @headerHeight;
+      width: 28px;
+      background: url(../images/logo.png) center no-repeat;
+      background-size: 28px;
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .info {
+      height: @headerHeight;
+      width: 153px;
+      background: url(../images/info.png) center no-repeat;
+      background-size: 153px;
+      position: absolute;
+      left: 50%;
+      margin-left: -76px;
+    }
+    .gray {
+      line-height: @headerHeight;
+    }
+  }
+}
+.container {
+  width: 960px;
+  padding:0;
+}
+.block{
+  display: block;
+  width:100%;
+}
+.gray {
+  color: @grayColor;
+}
+.relative {
+  position: relative;
+}
+.cp-popover-container {
+  .cp-hsvpanel-sv, .cp-hsvpanel-h {
+    cursor: pointer;
+  }
+  .popover {
+    border: 1px solid #DDD;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    .popover-content {
+      padding: 3px;
+    }
+    .cp-container.hsvpanel-active {
+      width: 172px;
+    }
+    .cp-transparency {
+      display: none;
+    }
+  }
+}

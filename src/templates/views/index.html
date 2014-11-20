@@ -1,0 +1,67 @@
+<section class="v_index">
+  <div class="container">
+    <div class="tagsArea clearfix">
+      <div class="tagArea">
+        <div class="complete">
+          <div data-autocomplete-area data-with-button="false" data-info="ctr.leftSideInfo.info"></div>
+        </div>
+        <div class="info" ng-class="{'active':ctr.tournamentsIsLoaded(0)}">
+          <div class="loader" ng-class="{'active':ctr.preloadingTagInfo[0]}"></div>
+          <div class="image" ng-style="{'background-image':'url('+ctr.leftSideInfo.info.img+')'}"></div>
+          <h2 ng-bind="ctr.leftSideInfo.info.name"></h2>
+          <div class="colors">Задайте цвет данных
+            <input type="text" class="colorPicker" value="#A6FF00" data-color-format="hex" color-picker>
+          </div>
+
+          <span class="plash" custom-select section-format="ctr.getSelectPlaceholder(0,'tour')" custom-content="true">
+            <button class="option" ng-repeat="tournament in ctr.leftSideInfo.tournaments" ng-click="ctr.selectParam(0,tournament, 'tour');$close();" ng-class="{'active':ctr.paramIsActive(0, tournament, 'tour')}">
+              {{tournament.name}}
+            </button>
+          </span>
+
+
+          <span class="plash" ng-class="{'inHide':!ctr.tournamentIsSelected(0)}" custom-select section-format="ctr.getSelectPlaceholder(0,'season')" custom-content="true">
+            <button class="option" ng-repeat="season in ctr.leftSideInfo.seasons" ng-click="ctr.selectParam(0,season, 'season');$close();" ng-class="{'active':ctr.paramIsActive(0, season, 'season')}">
+              {{season.name}}
+            </button>
+          </span>
+
+        </div>
+      </div>
+
+      <div class="tagArea second" ng-class="{'active':ctr.seasonIsSelected(0)}">
+        <div class="complete">
+          <div data-autocomplete-area data-with-button="true" data-info="ctr.rightSideInfo.info"></div>
+        </div>
+        <div class="info" ng-class="{'active':ctr.tournamentsIsLoaded(1)}">
+          <div class="loader" ng-class="{'active':ctr.preloadingTagInfo[1]}"></div>
+          <div class="image" ng-style="{'background-image':'url('+ctr.rightSideInfo.info.img+')'}"></div>
+          <h2 ng-bind="ctr.rightSideInfo.info.name"></h2>
+          <div class="colors">Задайте цвет данных
+            <input type="text" class="colorPicker" value="#FFA600" data-color-format="hex" color-picker>
+          </div>
+
+          <span class="plash" custom-select section-format="ctr.getSelectPlaceholder(1,'tour')" custom-content="true">
+            <button class="option" ng-repeat="tournament in ctr.rightSideInfo.tournaments" ng-click="ctr.selectParam(1,tournament, 'tour');$close();" ng-class="{'active':ctr.paramIsActive(1, tournament, 'tour')}">
+              {{tournament.name}}
+            </button>
+          </span>
+
+
+          <span class="plash" ng-class="{'inHide':!ctr.tournamentIsSelected(1)}" custom-select section-format="ctr.getSelectPlaceholder(1,'season')" custom-content="true">
+            <button class="option" ng-repeat="season in ctr.rightSideInfo.seasons" ng-click="ctr.selectParam(1,season, 'season');$close();" ng-class="{'active':ctr.paramIsActive(1, season, 'season')}">
+              {{season.name}}
+            </button>
+          </span>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="showResultsWrapper" ng-class="{'center':ctr.seasonIsSelected(1)}">
+	    <div class="showResults" ng-class="{'active':ctr.statsButtonIsActive()}">
+	      <button class="btn btn-primary block" ng-click="ctr.loadStats()">создать</button>
+	    </div>
+    </div>
+  </div>
+</section>

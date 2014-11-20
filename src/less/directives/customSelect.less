@@ -1,0 +1,93 @@
+.custom_select {
+  border: 1px solid #DFDFDF;
+  line-height: 30px;
+  font-size: 15px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  section {
+    padding: 0px 32px 0 10px;
+    position: relative;
+    z-index: 3;
+    background: #fff;
+    &:after {
+      content: "\f107";
+      font-family: FontAwesome;
+      position: absolute;
+      right: 6px;
+      top: 1px;
+      font-size: 22px;
+      color: #999;
+      transition: 0.4s;
+    }
+  }
+  menu {
+    position: absolute;
+    top: 0%;
+    background: #fff;
+    left: 0;
+    padding: 0;
+    z-index: 2;
+    box-shadow: 0px 2px 8px #ccc;
+    margin: 4px 0 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    max-height: 200px;
+    overflow: auto;
+    min-width: 100%;
+    .option {
+      padding: 0px 10px;
+      margin-top: -1px;
+      line-height: 27px;
+      white-space: nowrap;
+      background: transparent;
+      border: none;
+      outline: none;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      display: block;
+      width: 100%;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+      color: #555;
+      transition: 0.3s;
+      &:hover {
+        z-index: 2;
+        border-color: #ccc;
+        color: #000;
+        cursor: pointer;
+      }
+      &.active {
+        color: #009ee0;
+        &:hover {
+          color: #014d6d;
+        }
+      }
+      &[disabled], &[disabled]:hover {
+        color: #ccc;
+        background: #f9f9f9 url(../images/stripe.png) center repeat;
+        border-color: #eee;
+        cursor: default;
+      }
+    }
+  }
+  &.opened {
+    color: #333;
+    z-index: 3;
+    menu {
+      opacity: 1;
+      top: 100%;
+      visibility: visible;
+      z-index: 2222222;
+    }
+    section:after {
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      transform: rotate(180deg);
+      color: #333;
+    }
+  }
+}

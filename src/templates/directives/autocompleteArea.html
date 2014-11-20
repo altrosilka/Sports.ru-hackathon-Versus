@@ -1,0 +1,4 @@
+<div class="autocompleteArea" data-role="area">
+  <i class="fa fa-spinner fa-spin loading" ng-show="ctr.loadingInProgress"></i>
+  <input type="text" ng-model="ctr.model" placeholder="Начните вводить имя игрока" typeahead="tag as tag.name for tag in ctr.searchByQuery($viewValue)" typeahead-loading="ctr.loadingInProgress" typeahead-template-url="templates/other/autocompleteAreaTypeahead.html" typeahead-min-length="2" typeahead-on-select="ctr.onTagSelect($item, $model, $label)" class="form-control">
+</div>
