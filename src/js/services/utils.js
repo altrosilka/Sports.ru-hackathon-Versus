@@ -17,8 +17,22 @@ angular.module('App')
       return defer.promise;
     }
 
-    service.getVersusBackgrounds = function(){
-      return ['/images/versus-bg/fvs01.png','/images/versus-bg/fvs02.png','/images/versus-bg/fvs03.png','/images/versus-bg/fvs04.png','/images/versus-bg/fvs05.png','/images/versus-bg/fvs06.png','/images/versus-bg/fvs07.png'];
+    service.getVersusBackgrounds = function() {
+      return [{
+        url: '/images/versus-bg/fvs01.png'
+      }, {
+        url: '/images/versus-bg/fvs02.png'
+      }, {
+        url: '/images/versus-bg/fvs03.png'
+      }, {
+        url: '/images/versus-bg/fvs04.png'
+      }, {
+        url: '/images/versus-bg/fvs05.png'
+      }, {
+        url: '/images/versus-bg/fvs06.png'
+      }, {
+        url: '/images/versus-bg/fvs07.png'
+      }];
     }
 
     service.getContrastColor = function(hex) {

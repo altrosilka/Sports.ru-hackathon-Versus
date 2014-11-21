@@ -41,7 +41,7 @@ angular.module('App').controller('CV_stats', [
 
         info.mainImageIndex = 0;
         info.background_images = S_utils.getVersusBackgrounds();
-        info.mainImage = info.background_images[0];
+        info.mainImage = info.background_images[0].url;
 
         info.tag1.age = moment().diff(moment(info.tag1.birth_date, 'YYYY-MM-DD HH:mm:ss'), 'years');
         info.tag2.age = moment().diff(moment(info.tag2.birth_date, 'YYYY-MM-DD HH:mm:ss'), 'years');
@@ -54,7 +54,7 @@ angular.module('App').controller('CV_stats', [
         }).then(function() {
           $timeout(function() {
             ctr.readyToShow = true;
-          }, 200);
+          }, 500);
         });
       });
     } else {
@@ -65,16 +65,15 @@ angular.module('App').controller('CV_stats', [
       }).then(function(resp) {
         ctr.preloadingInfo = false;
 
-        if (resp.tag) {
-          ctr.solo = resp.tag;
 
-          ctr.solo.mainImageIndex = 0;
-          ctr.solo.mainImage = resp.tag.background_images[0];
+        ctr.solo = resp.tag;
 
-          var date = moment(resp.tag.birth_date, 'YYYY-MM-DD HH:mm:ss');
-          ctr.solo.age = moment().diff(date, 'years');
-          ctr.solo.birthdayHuman = date.format('D MMMM YYYY');
-        }
+        ctr.solo.mainImageIndex = 0;
+        ctr.solo.mainImage = resp.tag.background_images[0].url;
+
+        var date = moment(resp.tag.birth_date, 'YYYY-MM-DD HH:mm:ss');
+        ctr.solo.age = moment().diff(date, 'years');
+        ctr.solo.birthdayHuman = date.format('D MMMM YYYY');
 
         $q.all({
           avatar: S_utils.loadImage(ctr.solo.avatar),
@@ -82,7 +81,7 @@ angular.module('App').controller('CV_stats', [
         }).then(function() {
           $timeout(function() {
             ctr.readyToShow = true;
-          }, 200);
+          }, 500);
         });
       });
     }
@@ -125,7 +124,7 @@ angular.module('App').controller('CV_stats', [
         info.mainImageIndex = 0;
       }
 
-      info.mainImage = info.background_images[info.mainImageIndex];
+      info.mainImage = info.background_images[info.mainImageIndex].url;
     }
 
     ctr.toggleImage = function(key) {
@@ -144,20 +143,27 @@ angular.module('App').controller('CV_stats', [
 
     ctr.bannedSections = [];
 
-    ctr.sectionIsBanned = function(section){
-      var el = _.find(ctr.bannedSections, function(num) { return num === section; });
+    ctr.sectionIsBanned = function(section) {
+      var el = _.find(ctr.bannedSections, function(num) {
+        return num === section;
+      });
       return el;
     }
 
-    ctr.toggleSection = function(section){
-      var el = _.remove(ctr.bannedSections, function(num) { return num === section; });
+    ctr.toggleSection = function(section) {
+      var el = _.remove(ctr.bannedSections, function(num) {
+        return num === section;
+      });
 
-      if (!el || !el.length){
+      if (!el || !el.length) {
         ctr.bannedSections.push(section);
       }
     }
 
-    ctr.sliderInterval = 3000;
+    ctr.toHumanMatchDate = function(date){
+      return moment(date,'YYYY-MM-DD').format('DD.MM.YYYY');
+    }
+
 
     return ctr;
   }

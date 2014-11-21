@@ -74,22 +74,35 @@ angular.module('App')
           },
           "amplua": "Нападающий",
           "tag_url": "http://www.sports.ru/kokorin/",
-          "background_images": [
-            {url:'http://s5o.ru/storage/simple/ru/edt/89/14/51/73/rue514b41dfa7.jpg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/85/79/56/26/rue8607905bce.jpg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/41/64/64/95/rued3d92c842a.jpg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/84/42/72/05/rue31356179ee.jpg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/86/02/54/20/ruef856755f40.jpg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/86/08/53/34/rue2d9fc0aace.jpg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/84/54/29/08/rue09a8cca094.jpg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/20/22/21/27/rue05cdcac0cf.jpg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/20/17/10/99/rue104243346a.jpg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/52/82/45/89/ruefce727ee00.jpg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/04/84/56/56/rue8839ad570a.49.670x1340.jpeg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/03/57/60/36/ruef4b81e0a03.49.670x1340.jpeg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/58/03/47/29/rue809df0a512.jpeg'},
-            {url:'http://s5o.ru/storage/simple/ru/edt/34/75/58/95/rue9dadbe4331.49.670x1340.jpeg'}
-          ],
+          "background_images": [{
+            url: 'http://s5o.ru/storage/simple/ru/edt/89/14/51/73/rue514b41dfa7.jpg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/85/79/56/26/rue8607905bce.jpg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/41/64/64/95/rued3d92c842a.jpg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/84/42/72/05/rue31356179ee.jpg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/86/02/54/20/ruef856755f40.jpg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/86/08/53/34/rue2d9fc0aace.jpg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/84/54/29/08/rue09a8cca094.jpg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/20/22/21/27/rue05cdcac0cf.jpg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/20/17/10/99/rue104243346a.jpg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/52/82/45/89/ruefce727ee00.jpg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/04/84/56/56/rue8839ad570a.49.670x1340.jpeg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/03/57/60/36/ruef4b81e0a03.49.670x1340.jpeg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/58/03/47/29/rue809df0a512.jpeg'
+          }, {
+            url: 'http://s5o.ru/storage/simple/ru/edt/34/75/58/95/rue9dadbe4331.49.670x1340.jpeg'
+          }],
           "stat": {
             "season": "Сезон 2014/2015 ",
             "tournament": "премьер-лига Россия",
@@ -118,7 +131,17 @@ angular.module('App')
             }],
             "yellow_cards": 1,
             "red_cards": 4,
-            "most_efficient_match": {},
+            "most_efficient_match": [{
+              teams: 'Спартак-Динамо',
+              score: '0:2',
+              goals: 4,
+              date: '2014-02-24' 
+            },{
+              teams: 'Спартак-Динамо',
+              score: '0:6',
+              goals: 7,
+              date: '2014-09-22' 
+            }],
             "matches_count": 12
           }
         });
