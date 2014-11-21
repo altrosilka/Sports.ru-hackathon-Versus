@@ -1653,6 +1653,13 @@ body > header .left .gray:hover {
   opacity: 0.6;
   transition: 0.2s;
 }
+.v_stats .rightComment.left {
+  right: 100%;
+  left: auto;
+  margin-left: 0px;
+  margin-right: 20px;
+  text-align: right;
+}
 .v_stats .rightComment .add {
   display: none;
 }
@@ -1753,7 +1760,7 @@ body > header .left .gray:hover {
   visibility: visible;
 }
 .v_stats .statsArea .background .info {
-  z-index: 3;
+  z-index: 4;
   position: absolute;
   left: 0;
   right: 0;
@@ -1853,6 +1860,178 @@ body > header .left .gray:hover {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+.v_stats .statsArea .versus .background .colorImage {
+  position: absolute;
+  z-index: 3;
+  width: 50%;
+  top: 0;
+  bottom: 0;
+  opacity: 0.3;
+  transition: 0.2s;
+}
+.v_stats .statsArea .versus .background .colorImage.left {
+  left: 0;
+}
+.v_stats .statsArea .versus .background .colorImage.right {
+  right: 0;
+}
+.v_stats .statsArea .versus .background .info {
+  background-color: transparent;
+}
+.v_stats .statsArea .versus .background .info .player {
+  width: 50%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.v_stats .statsArea .versus .background .info .player.left {
+  left: 0;
+}
+.v_stats .statsArea .versus .background .info .player.right {
+  right: 0;
+}
+.v_stats .statsArea .versus .background .info .player .overview {
+  top: auto;
+  bottom: 30px;
+}
+.v_stats .statsArea .versus .background .info .player .overview .age {
+  margin-bottom: 4px;
+}
+.v_stats .statsArea .versus .background .info .player .overview .age strong {
+  margin: 0!important;
+}
+.v_stats .statsArea .versus .background .info .player .overview .point {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.v_stats .statsArea .versus .background .info .player .overview .point strong {
+  margin-left: 20px;
+  display: inline-block;
+}
+.v_stats .statsArea .versus .background .info .player .image {
+  border: none;
+  margin-left: -75px;
+  top: 67px;
+}
+.v_stats .statsArea .versus .background .info .player .country {
+  top: 230px;
+}
+.v_stats .statsArea .versus .background .info .player h1 {
+  bottom: 142px;
+  font-size: 30px;
+}
+.v_stats .statsArea .versus .background .info .player .tour {
+  top: 10px;
+  font-size: 14px;
+  bottom: auto;
+}
+.v_stats .statsArea .versus .background .info .player .tour span {
+  margin-top: 2px;
+  display: block;
+}
+.v_stats .statsArea .versus .teamReview .team {
+  float: left;
+  width: 50%;
+  position: relative;
+  height: 100%;
+  transition: 0.2s;
+}
+.v_stats .statsArea .versus .teamReview .team .name {
+  left: 70px;
+  position: absolute;
+}
+.v_stats .statsArea .versus .teamReview .team .logo {
+  left: 25px;
+  margin: 0;
+}
+.v_stats .statsArea .versus .teamReview .team.right .name {
+  right: 70px;
+  left: auto;
+}
+.v_stats .statsArea .versus .teamReview .team.right .logo {
+  right: 25px;
+  left: auto;
+}
+.v_stats .statsArea .versus .table .stata {
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+.v_stats .statsArea .versus .table .stata .ball {
+  font-size: 24px;
+  position: relative;
+  top: 16px;
+  margin: 0 5px;
+}
+.v_stats .statsArea .versus .table .stata h3 {
+  position: relative;
+  margin-left: 30%;
+  margin-right: 30%;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+.v_stats .statsArea .versus .table .stata .inner {
+  padding: 35px 0;
+}
+.v_stats .statsArea .versus .table .stata .inner .count {
+  font-size: 60px;
+  font-weight: bold;
+  position: relative;
+  top: 19px;
+}
+.v_stats .statsArea .versus .table .stata .inner .field {
+  display: inline-block;
+  color: #888;
+  font-size: 12px;
+  position: relative;
+  top: 19px;
+  margin-left: 12px;
+}
+.v_stats .statsArea .versus .table .stata .inner .field.lefter {
+  margin-left: 0px;
+  margin-right: 12px;
+}
+.v_stats .statsArea .versus .table .stata .inner .subcount {
+  display: block;
+  font-size: 27px;
+  font-weight: bold;
+  margin-top: -5px;
+}
+.v_stats .statsArea .versus .table .stata .inner .left,
+.v_stats .statsArea .versus .table .stata .inner .right {
+  position: absolute;
+  top: 0;
+}
+.v_stats .statsArea .versus .table .stata .inner .left {
+  right: 70%;
+  text-align: right;
+}
+.v_stats .statsArea .versus .table .stata .inner .right {
+  left: 70%;
+}
+.v_stats .statsArea .versus .table .stata.rest h3 {
+  margin-top: -6px;
+}
+.v_stats .statsArea .versus .table .stata .na2chart {
+  width: 50%;
+  float: left;
+  padding: 5px;
+  height: 250px;
+}
+.v_stats .statsArea .versus .table .stata .na2chart .chart {
+  height: 100%;
+  width: 100%;
+}
+.v_stats .statsArea .versus .table .stata.full .inner {
+  padding: 15px 0;
+}
+.v_stats .statsArea .versus .table .stata.full .inner h3 {
+  position: relative;
+  left: 0;
+  top: 0;
+  right: 0;
+  margin: 10px 0 20px;
 }
 .v_index .tagsArea {
   position: relative;

@@ -4,74 +4,312 @@
       <i class="fa fa-futbol-o fa-spin loading"></i>
     </div>
     <div class="statsArea" ng-class="{'active':ctr.readyToShow}">
-      <div class="background" ng-class="{'exec':ctr.witoutBackground(0)}">
-        <div class="rightComment" ng-click="ctr.toggleImage(0);">
-          <span class="remove">
-            <i class="fa fa-times"></i>
-            <div class="text">Удалить фоновую
-              <br>фотографию</div>
-          </span>
-          <span class="add">
-            <i class="fa fa-check"></i>
-            <div class="text">Показать фоновую
-              <br>фотографию</div>
-          </span>
+      <section ng-if="ctr.oneTag">
+        <div class="background" ng-class="{'exec':ctr.witoutBackground(ctr.solo)}">
+          <div class="rightComment" ng-click="ctr.toggleImage(ctr.solo);">
+            <span class="remove">
+              <i class="fa fa-times"></i>
+              <div class="text">Удалить фоновую
+                <br>фотографию</div>
+            </span>
+            <span class="add">
+              <i class="fa fa-check"></i>
+              <div class="text">Показать фоновую
+                <br>фотографию</div>
+            </span>
+          </div>
+
+          <div class="rightComment other" ng-click="ctr.nextTagImage(ctr.solo)">
+            <i class="fa fa-angle-right"></i>
+            <div class="text">Другая
+              <br>фотография</div>
+          </div>
+
+          <div class="backimage" set-bg-on-load="ctr.solo.mainImage" new-layer="true"></div>
+
+          <div class="info">
+            <div class="overview left">
+              <div class="point">Родился
+                <strong ng-bind="ctr.solo.birthdayHuman"></strong>
+              </div>
+              <div class="point">Возраст
+                <strong ng-bind="ctr.solo.age"></strong>
+              </div>
+            </div>
+            <div class="overview right">
+              <div class="point">Рост
+                <strong>
+                  <span ng-bind="ctr.getTagInfo(0).height"></span>&nbsp;см</strong>
+              </div>
+              <div class="point">Вес
+                <strong>
+                  <span ng-bind="ctr.getTagInfo(0).weight"></span>&nbsp;кг</strong>
+              </div>
+            </div>
+            <div class="image" ng-style="{'background-image':'url('+ctr.solo.avatar+')','border-color':ctr.getColor(0)}"></div>
+            <div class="country">
+              <span class="flag" class="flag-icon" flag-icon="ctr.solo.flag.flag_code"></span>
+              <span class="title" ng-bind="ctr.solo.flag.flag_country"></span>
+            </div>
+            <h1>
+              <div ng-bind="ctr.solo.player_name"></div>
+              <div ng-bind="ctr.solo.player_surname"></div>
+            </h1>
+            <div class="tour">
+              <span ng-bind="ctr.solo.stat.tournament"></span>.&nbsp;
+              <span ng-bind="ctr.solo.stat.season"></span>
+            </div>
+          </div>
+        </div>
+        <div class="teamReview" ng-style="{'background-color':ctr.getColor(0), 'color':ctr.getTextColor(0)}">
+          <div class="rightComment color">
+            <label>
+              <i class="fa fa-eyedropper"></i>
+              <div class="text">Изменить цвет</div>
+              <input type="text" class="colorPicker" placement="top" data-color-format="hex" tag-num="0" color-change="ctr.setColor(color, key)" color-picker="ctr.getColor(0)">
+            </label>
+          </div>
+          <a class="name pull-left link no-border" ng-href="{{ctr.solo.team.tag_url}}" ng-bind="ctr.solo.team.name" ng-style="{'color':ctr.getTextColor(0)}"></a>
+          <a class="logo" target="_blank" ng-href="{{ctr.solo.team.tag_url}}" ng-style="{'background-image':'url('+ctr.solo.team.logo+')'}">
+          </a>
+          <span class="amplua pull-right" ng-bind="ctr.solo.amplua"></span>
         </div>
 
-        <div class="rightComment other" ng-click="ctr.nextTagImage(0)">
-          <i class="fa fa-angle-right"></i>
-          <div class="text">Другая
-            <br>фотография</div>
+      </section>
+
+
+
+
+
+
+
+      <section ng-if="!ctr.oneTag" class="versus">
+        <div class="background" ng-class="{'exec':ctr.witoutBackground(ctr.versus)}">
+          <div class="rightComment" ng-click="ctr.toggleImage(ctr.versus);">
+            <span class="remove">
+              <i class="fa fa-times"></i>
+              <div class="text">Удалить фоновую
+                <br>фотографию</div>
+            </span>
+            <span class="add">
+              <i class="fa fa-check"></i>
+              <div class="text">Показать фоновую
+                <br>фотографию</div>
+            </span>
+          </div>
+
+          <div class="rightComment other" ng-click="ctr.nextTagImage(ctr.versus)">
+            <i class="fa fa-angle-right"></i>
+            <div class="text">Другая
+              <br>фотография</div>
+          </div>
+
+          <div class="backimage" set-bg-on-load="ctr.versus.mainImage" new-layer="true"></div>
+
+          <div class="colorImage left" ng-style="{'background-color':ctr.getColor(0)}"></div>
+          <div class="colorImage right" ng-style="{'background-color':ctr.getColor(1)}"></div>
+
+          <div class="info">
+
+            <div class="player left">
+              <div class="overview left">
+                <div class="point age">
+                  <strong ng-pluralize count="ctr.getTagInfo(0).age" when="ctr.yearsPlural"></strong>
+                </div>
+                <div class="point">Рост
+                  <strong>
+                    <span ng-bind="ctr.getTagInfo(0).height"></span>&nbsp;см</strong>
+                </div>
+                <div class="point">Вес
+                  <strong>
+                    <span ng-bind="ctr.getTagInfo(0).weight"></span>&nbsp;кг</strong>
+                </div>
+              </div>
+
+              <div class="image" ng-style="{'background-image':'url('+ctr.getTagInfo(0).avatar+')'}"></div>
+              <div class="country">
+                <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(0).flag.flag_code"></span>
+                <span class="title" ng-bind="ctr.getTagInfo(0).flag.flag_country"></span>
+              </div>
+              <h1>
+                <div ng-bind="ctr.getTagInfo(0).player_name"></div>
+                <div ng-bind="ctr.getTagInfo(0).player_surname"></div>
+              </h1>
+              <div class="tour">
+                <span ng-bind="ctr.getTagInfo(0).stat.tournament"></span>
+                <span ng-bind="ctr.getTagInfo(0).stat.season"></span>
+              </div>
+            </div>
+
+            <div class="player right">
+              <div class="overview right">
+                <div class="point age">
+                  <strong ng-pluralize count="ctr.getTagInfo(1).age" when="ctr.yearsPlural"></strong>
+                </div>
+                <div class="point">Рост
+                  <strong>
+                    <span ng-bind="ctr.getTagInfo(1).height"></span>&nbsp;см</strong>
+                </div>
+                <div class="point">Вес
+                  <strong>
+                    <span ng-bind="ctr.getTagInfo(1).weight"></span>&nbsp;кг</strong>
+                </div>
+              </div>
+
+              <div class="image" ng-style="{'background-image':'url('+ctr.getTagInfo(1).avatar+')'}"></div>
+              <div class="country">
+                <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(1).flag.flag_code"></span>
+                <span class="title" ng-bind="ctr.getTagInfo(1).flag.flag_country"></span>
+              </div>
+              <h1>
+                <div ng-bind="ctr.getTagInfo(1).player_name"></div>
+                <div ng-bind="ctr.getTagInfo(1).player_surname"></div>
+              </h1>
+              <div class="tour">
+                <span ng-bind="ctr.getTagInfo(1).stat.tournament"></span>
+                <span ng-bind="ctr.getTagInfo(1).stat.season"></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="teamReview">
+          <div class="rightComment color">
+            <label>
+              <i class="fa fa-eyedropper"></i>
+              <div class="text">Изменить цвет</div>
+              <input type="text" class="colorPicker" placement="top" data-color-format="hex" tag-num="1" color-change="ctr.setColor(color, key)" color-picker="ctr.getColor(1)">
+            </label>
+          </div>
+          <div class="rightComment color left">
+            <label>
+              <i class="fa fa-eyedropper"></i>
+              <div class="text">Изменить цвет</div>
+              <input type="text" class="colorPicker" placement="top" data-color-format="hex" tag-num="0" color-change="ctr.setColor(color, key)" color-picker="ctr.getColor(0)">
+            </label>
+          </div>
+
+          <div class="team" ng-style="{'background-color':ctr.getColor(0), 'color':ctr.getTextColor(0)}">
+            <a class="name link no-border" ng-href="{{ctr.getTagInfo(0).team.tag_url}}" ng-bind="ctr.getTagInfo(0).team.name" ng-style="{'color':ctr.getTextColor(0)}"></a>
+            <a class="logo" target="_blank" ng-href="{{ctr.getTagInfo(0).team.tag_url}}" ng-style="{'background-image':'url('+ctr.getTagInfo(0).team.logo+')'}">
+            </a>
+          </div>
+
+          <div class="team right" ng-style="{'background-color':ctr.getColor(1), 'color':ctr.getTextColor(1)}">
+            <a class="name link no-border" ng-href="{{ctr.getTagInfo(1).team.tag_url}}" ng-bind="ctr.getTagInfo(1).team.name" ng-style="{'color':ctr.getTextColor(1)}"></a>
+            <a class="logo" target="_blank" ng-href="{{ctr.getTagInfo(1).team.tag_url}}" ng-style="{'background-image':'url('+ctr.getTagInfo(1).team.logo+')'}">
+            </a>
+          </div>
+
         </div>
 
-        <div class="backimage" set-bg-on-load="ctr.firstTagInfo.mainImage" new-layer="true"></div>
+        <div class="table" ui-sortable>
+          <section class="stata" data-tab="Матчи">
+            <span class="remove">
+              <i class="fa fa-remove"></i>
+            </span>
+            <span class="reorder" data-role="reorder">
+              <i class="fa fa-bars"></i>
+            </span>
+            <div class="inner">
+              <h3>Матчи</h3>
+              <div class="left">
 
-        <div class="info">
-          <div class="overview left">
-            <div class="point">Родился
-              <strong ng-bind="ctr.getTagInfo(0).birthdayHuman"></strong>
+                <span class="field lefter">
+                  минут на поле
+                  <div class="subcount" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.minutes"></div>
+                </span>
+                <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.matches_count"></span>
+              </div>
+              <div class="right">
+                <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.matches_count"></span>
+                <span class="field">
+                  минут на поле
+                  <div class="subcount" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.minutes"></div>
+                </span>
+              </div>
             </div>
-            <div class="point">Возраст
-              <strong ng-bind="ctr.getTagInfo(0).age"></strong>
+          </section>
+
+          <section class="stata" data-tab="Голы">
+            <span class="remove">
+              <i class="fa fa-remove"></i>
+            </span>
+            <span class="reorder" data-role="reorder">
+              <i class="fa fa-bars"></i>
+            </span>
+            <div class="inner">
+              <h3>Голы</h3>
+              <div class="left">
+                <i class="fa fa-futbol-o ball"></i>
+                <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.goals"></span>
+              </div>
+              <div class="right">
+                <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.goals"></span>
+                <i class="fa fa-futbol-o ball"></i>
+              </div>
             </div>
-          </div>
-          <div class="overview right">
-            <div class="point">Рост
-              <strong ng-bind="ctr.getTagInfo(0).height"></strong>
+          </section>
+
+          <section class="stata" data-tab="Передачи">
+            <span class="remove">
+              <i class="fa fa-remove"></i>
+            </span>
+            <span class="reorder" data-role="reorder">
+              <i class="fa fa-bars"></i>
+            </span>
+            <div class="inner">
+              <h3>Передачи</h3>
+              <div class="left">
+                <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.goal_passes"></span>
+              </div>
+              <div class="right">
+                <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.goal_passes"></span>
+              </div>
             </div>
-            <div class="point">Вес
-              <strong ng-bind="ctr.getTagInfo(0).weight"></strong>
+          </section>
+
+          <section class="stata rest" data-tab="Минут на результативное действие">
+            <span class="remove">
+              <i class="fa fa-remove"></i>
+            </span>
+            <span class="reorder" data-role="reorder">
+              <i class="fa fa-bars"></i>
+            </span>
+            <div class="inner">
+              <h3>Минут на
+                <br>результативное
+                <br>действие</h3>
+              <div class="left">
+                <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.efficient_minutes"></span>
+              </div>
+              <div class="right">
+                <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.efficient_minutes"></span>
+              </div>
             </div>
-          </div>
-          <div class="image" ng-style="{'background-image':'url('+ctr.getTagInfo(0).avatar+')','border-color':ctr.getColor(0)}"></div>
-          <div class="country">
-            <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(0).flag.flag_code"></span>
-            <span class="title" ng-bind="ctr.getTagInfo(0).flag.flag_country"></span>
-          </div>
-          <h1>
-            <div ng-bind="ctr.getTagInfo(0).player_name"></div>
-            <div ng-bind="ctr.getTagInfo(0).player_surname"></div>
-          </h1>
-          <div class="tour">
-            <span ng-bind="ctr.getTagInfo(0).stat.tournament"></span>.&nbsp;
-            <span ng-bind="ctr.getTagInfo(0).stat.season"></span>
-          </div>
+          </section>
+
+          <section class="stata full" data-tab="Распределение голов по минутам">
+           <span class="remove">
+              <i class="fa fa-remove"></i>
+            </span>
+            <span class="reorder" data-role="reorder">
+              <i class="fa fa-bars"></i>
+            </span>
+            <div class="inner">
+              <h3>Распределение голов по минутам</h3>
+              <div class="clearfix">
+                <div class="na2chart">
+                  <div class="chart" goals-timeline="ctr.getTagInfo(0).stat.goals_timeline" color="ctr.getColor(0)"></div>
+                </div>
+                <div class="na2chart">
+                  <div class="chart" goals-timeline="ctr.getTagInfo(1).stat.goals_timeline" color="ctr.getColor(1)"></div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-      </div>
-      <div class="teamReview" ng-style="{'background-color':ctr.getColor(0), 'color':ctr.getTextColor(0)}">
-        <div class="rightComment color">
-          <label>
-            <i class="fa fa-eyedropper"></i>
-            <div class="text">Изменить цвет</div>
-            <input type="text" class="colorPicker" placement="top" data-color-format="hex" tag-num="0" color-change="ctr.setColor(color, key)" color-picker="ctr.getColor(0)">
-          </label>
-        </div>
-        <a class="name pull-left link no-border" ng-href="{{ctr.getTagInfo(0).team.tag_url}}" ng-bind="ctr.getTagInfo(0).team.name" ng-style="{'color':ctr.getTextColor(0)}"></a>
-        <a class="logo" target="_blank" ng-href="{{ctr.getTagInfo(0).team.tag_url}}" ng-style="{'background-image':'url('+ctr.getTagInfo(0).team.logo+')'}">
-        </a>
-        <span class="amplua pull-right" ng-bind="ctr.getTagInfo(0).amplua"></span>
-      </div>
-      saddasdsa
+      </section>
     </div>
   </div>
 </section>

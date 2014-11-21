@@ -14,43 +14,83 @@ angular.module('App').controller('CV_stats', [
       color2 = $state.params.c2;
 
     ctr.preloadingInfo = true;
-    ctr.firstTagInfo = {};
-    ctr.secondTagInfo = {};
+    ctr.solo = {};
+    ctr.versus = {};
 
-    var loadingObj = {
-      tag: S_api.getTagStat($state.params.tag)
-    }
+    ctr.yearsPlural = {
+      0: '',
+      one: '{} год',
+      few: '{} года',
+      many: '{} лет',
+      other: '{} года'
+    };
 
     if ($state.params.tag2) {
-      loadingObj.tag2 = $state.params.tag2;
-    }
 
-    $q.all(loadingObj).then(function(resp) {
-      ctr.preloadingInfo = false;
-
-      if (resp.tag) {
-        ctr.firstTagInfo = resp.tag;
-
-        ctr.firstTagInfo.mainImageIndex = 0;
-        ctr.firstTagInfo.mainImage = resp.tag.background_images[0];
-
-        var date = moment(resp.tag.birth_date, 'YYYY-MM-DD HH:mm:ss');
-        ctr.firstTagInfo.age = moment().diff(date, 'years');
-        ctr.firstTagInfo.birthdayHuman = date.format('D MMMM YYYY');
-      }
-
+      ctr.oneTag = false;
 
       $q.all({
-        avatar: S_utils.loadImage(ctr.firstTagInfo.avatar),
-        mainImage: S_utils.loadImage(ctr.firstTagInfo.mainImage)
-      }).then(function() {
-        ctr.readyToShow = true;
-      })
+        tag1: S_api.getTagStat($state.params.tag),
+        tag2: S_api.getTagStat($state.params.tag2)
+      }).then(function(resp) {
+        ctr.preloadingInfo = false;
+        var info = ctr.versus;
 
-    });
+        info.tag1 = resp.tag1;
+        info.tag2 = resp.tag2;
+
+        info.mainImageIndex = 0;
+        info.background_images = S_utils.getVersusBackgrounds();
+        info.mainImage = info.background_images[0];
+
+        info.tag1.age = moment().diff(moment(info.tag1.birth_date, 'YYYY-MM-DD HH:mm:ss'), 'years');
+        info.tag2.age = moment().diff(moment(info.tag2.birth_date, 'YYYY-MM-DD HH:mm:ss'), 'years');
+
+
+        $q.all({
+          avatar1: S_utils.loadImage(info.tag1.avatar),
+          avatar2: S_utils.loadImage(info.tag2.avatar),
+          mainImage: S_utils.loadImage(info.mainImage)
+        }).then(function() {
+          $timeout(function() {
+            ctr.readyToShow = true;
+          }, 200);
+        });
+      });
+    } else {
+      ctr.oneTag = true;
+
+      $q.all({
+        tag: S_api.getTagStat($state.params.tag)
+      }).then(function(resp) {
+        ctr.preloadingInfo = false;
+
+        if (resp.tag) {
+          ctr.solo = resp.tag;
+
+          ctr.solo.mainImageIndex = 0;
+          ctr.solo.mainImage = resp.tag.background_images[0];
+
+          var date = moment(resp.tag.birth_date, 'YYYY-MM-DD HH:mm:ss');
+          ctr.solo.age = moment().diff(date, 'years');
+          ctr.solo.birthdayHuman = date.format('D MMMM YYYY');
+        }
+
+        $q.all({
+          avatar: S_utils.loadImage(ctr.solo.avatar),
+          mainImage: S_utils.loadImage(ctr.solo.mainImage)
+        }).then(function() {
+          $timeout(function() {
+            ctr.readyToShow = true;
+          }, 200);
+        });
+      });
+    }
+
+
 
     ctr.getTagInfo = function(key) {
-      return ((!key) ? ctr.firstTagInfo : ctr.secondTagInfo);
+      return ((typeof key === 'number') ? ((!key) ? ctr.versus.tag1 : ctr.versus.tag2) : key);
     }
 
     ctr.getColor = function(key) {
@@ -85,7 +125,7 @@ angular.module('App').controller('CV_stats', [
         info.mainImageIndex = 0;
       }
 
-      info.mainImage = info.background_images[ctr.firstTagInfo.mainImageIndex];
+      info.mainImage = info.background_images[info.mainImageIndex];
     }
 
     ctr.toggleImage = function(key) {

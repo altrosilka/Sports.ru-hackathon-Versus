@@ -14,6 +14,10 @@ var gulp = require("gulp"),
 
 var vendorLibs = [
   './bower_components/jquery/dist/jquery.js',
+  './bower_components/jquery-ui/ui/core.js',
+  './bower_components/jquery-ui/ui/widget.js',
+  './bower_components/jquery-ui/ui/mouse.js',
+  './bower_components/jquery-ui/ui/sortable.js',
   './bower_components/lodash/dist/lodash.js',
   './bower_components/bootstrap/dist/js/bootstrap.js',
   './bower_components/angular/angular.js',
@@ -21,8 +25,10 @@ var vendorLibs = [
   './bower_components/angular-ui-router/release/angular-ui-router.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/tinycolor/tinycolor.js',
+  './bower_components/angular-ui-sortable/sortable.js',
   './bower_components/momentjs/moment.js',
   './bower_components/momentjs/locale/ru.js',
+  './bower_components/highcharts/highcharts.src.js',
   './bower_components/bootstrap-colorpickersliders/dist/bootstrap.colorpickersliders.js'
 ];
 
