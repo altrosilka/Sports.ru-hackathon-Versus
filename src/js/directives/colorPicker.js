@@ -7,6 +7,17 @@ angular.module('App').directive('colorPicker', [function() {
     },
     link: function($scope, $element, $attrs) {
 
+      if (typeof $scope.color === 'undefined'){
+        $element.addClass('pickerIsInited').ColorPickerSliders({
+          placement: $attrs.placement || 'right',
+          hsvpanel: true,
+          sliders: false,
+          swatches: false,
+          previewformat: 'hex'
+        });
+        return;
+      }
+
       $scope.$watch(function() {
         return $scope.color;
       }, function(color) {
