@@ -1,0 +1,235 @@
+.v_stats {
+  .loader {
+    position: fixed;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    transform: scale(0.9);
+    opacity: 0;
+    margin: -26px 0 0 -26px;
+    visibility: hidden;
+    transition: @fastTime;
+    .loading {
+      font-size: 52px;
+      color: @baseColor;
+      display: inline-block;
+    }
+    &.active {
+      transform: scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  .rightComment {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 20px;
+    line-height: 1.7em;
+    opacity: 0.6;
+    transition: @fastTime;
+    .add {
+      display: none;
+    }
+    .remove {
+      display: block;
+    }
+    i {
+      font-size: 35px;
+    }
+    .text {
+      font-size: 18px;
+      white-space: nowrap;
+    }
+    &.other {
+      top: 50%;
+      margin-top: -33px;
+      i {
+        font-size: 70px;
+      }
+    }
+    &.color {
+      color: #000;
+      label {
+        cursor: pointer!important;
+        font-weight: normal;
+      }
+      i {
+        font-size: 24px;
+      }
+      input {
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        position: absolute;
+        left: 60px;
+        top: 30px;
+      }
+    }
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+  .statsArea {
+    opacity: 0;
+    visibility: hidden;
+    transition: @stdTime;
+    width: 670px;
+    margin: 60px auto;
+    box-shadow: 0px 0px 20px #ddd;
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .background {
+      height: 490px;
+      background-color: #222;
+      position: relative;
+      transition: @stdTime;
+      &.exec {
+        height: 390px;
+        .backimage {
+          opacity: 0;
+        }
+        .rightComment {
+          .remove {
+            display: none;
+          }
+          .add {
+            display: block;
+          }
+        }
+      }
+      .backimage {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        transition: @stdTime;
+        .layer {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          z-index: 1;
+          transition: opacity 0.5s, visibility 0.5s;
+          opacity: 0;
+          visibility: hidden;
+          &.active {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+      .info {
+        z-index: 3;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        .overview {
+          position: absolute;
+          top: 40px;
+          font-size: 18px;
+          &.left {
+            left: 25px
+          }
+          &.right {
+            right: 25px;
+            text-align: right;
+          }
+          .point {
+            margin-bottom: 25px;
+            strong {
+              display: block;
+            }
+          }
+        }
+        .image {
+          position: absolute;
+          left: 50%;
+          width: 156px;
+          height: 156px;
+          margin-left: -78px;
+          top: 40px;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 3px solid;
+          transition: border-color @fastTime;
+        }
+        .country {
+          position: absolute;
+          top: 205px;
+          left: 100px;
+          right: 100px;
+          text-align: center;
+          font-size: 18px;
+          .flag {
+            width: 24px;
+            height: 18px;
+            display: inline-block;
+            background-size: 24px;
+            background-repeat: no-repeat;
+            position: relative;
+            margin-right: 7px;
+            top: 4px;
+          }
+          .title {
+            font-size: 14px;
+          }
+        }
+        h1 {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 45px;
+          text-align: center;
+          font-weight: 700;
+          font-size: 36px;
+        }
+        .tour {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 17px;
+          text-align: center;
+          font-size: 17px;
+        }
+      }
+    }
+    .teamReview {
+      height: 50px;
+      position: relative;
+      transition: @fastTime;
+      .name, .amplua {
+        font-size: 16px;
+        line-height: 50px;
+        margin: 0 20px;
+        display: block;
+      }
+      .logo {
+        position: absolute;
+        display: block;
+        left: 50%;
+        margin-left: -25px;
+        top: 0;
+        width: 50px;
+        height: 50px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@
       margin-right: 80px;
       margin-top: 45px;
       float: left;
+      position: relative;
       &.second {
         transition: @stdTime;
         transform: translateY(30px) scale(1);
@@ -21,6 +22,28 @@
       &:last-child {
         margin-right: 0;
       }
+      .loader {
+        position: absolute;
+        text-align: center;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        transform: scale(0.9) translateY(-10px);
+        opacity: 0;
+        top: 110px;
+        visibility: hidden;
+        transition: @fastTime;
+        .loading {
+          font-size: 32px;
+          color:@baseColor;
+          display: inline-block;
+        }
+        &.active {
+          transform: scale(1) translateY(0px);
+          opacity: 1;
+          visibility: visible;
+        }
+      }
       .complete {} .info {
         transition: @stdTime;
         transform: scale(0.9) translateY(-60px);
@@ -31,7 +54,9 @@
           opacity: 1;
           visibility: visible;
         }
-        .loader {} .image {
+        .image {
+          z-index: 3;
+          position: relative;
           display: block;
           width: 100px;
           height: 100px;
@@ -47,7 +72,7 @@
           text-align: center;
           font-size: 24px;
           font-weight: 700;
-          width: 200px;
+          width: 300px;
           margin: 15px auto;
         }
         .colors {

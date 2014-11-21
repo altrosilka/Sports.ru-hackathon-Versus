@@ -5,12 +5,15 @@
         <div class="complete">
           <div data-autocomplete-area data-with-button="false" data-info="ctr.leftSideInfo.info"></div>
         </div>
+        <div class="loader" ng-class="{'active':ctr.showTagPreloader(0)}">
+          <i class="fa  fa-circle-o-notch fa-spin loading"></i>
+        </div>
         <div class="info" ng-class="{'active':ctr.tournamentsIsLoaded(0)}">
-          <div class="loader" ng-class="{'active':ctr.preloadingTagInfo[0]}"></div>
+
           <div class="image" ng-style="{'background-image':'url('+ctr.leftSideInfo.info.img+')'}"></div>
           <h2 ng-bind="ctr.leftSideInfo.info.name"></h2>
           <div class="colors">Задайте цвет данных
-            <input type="text" class="colorPicker" value="#A6FF00" data-color-format="hex" color-picker>
+            <input type="text" class="colorPicker" ng-blur="ctr.setColor($event,0)" data-color-format="hex" color-picker>
           </div>
 
           <span class="plash" custom-select section-format="ctr.getSelectPlaceholder(0,'tour')" custom-content="true">
@@ -33,12 +36,15 @@
         <div class="complete">
           <div data-autocomplete-area data-with-button="true" data-info="ctr.rightSideInfo.info"></div>
         </div>
+        <div class="loader" ng-class="{'active':ctr.showTagPreloader(1)}">
+          <i class="fa  fa-circle-o-notch fa-spin loading"></i>
+        </div>
         <div class="info" ng-class="{'active':ctr.tournamentsIsLoaded(1)}">
-          <div class="loader" ng-class="{'active':ctr.preloadingTagInfo[1]}"></div>
+
           <div class="image" ng-style="{'background-image':'url('+ctr.rightSideInfo.info.img+')'}"></div>
           <h2 ng-bind="ctr.rightSideInfo.info.name"></h2>
           <div class="colors">Задайте цвет данных
-            <input type="text" class="colorPicker" value="#FFA600" data-color-format="hex" color-picker>
+            <input type="text" class="colorPicker" value="#FFA600" data-color-format="hex" ng-model="ctr.rightSideInfo.color" color-picker>
           </div>
 
           <span class="plash" custom-select section-format="ctr.getSelectPlaceholder(1,'tour')" custom-content="true">
@@ -59,9 +65,9 @@
 
     </div>
     <div class="showResultsWrapper" ng-class="{'center':ctr.seasonIsSelected(1)}">
-	    <div class="showResults" ng-class="{'active':ctr.statsButtonIsActive()}">
-	      <button class="btn btn-primary block" ng-click="ctr.loadStats()">создать</button>
-	    </div>
+      <div class="showResults" ng-class="{'active':ctr.statsButtonIsActive()}">
+        <button class="btn btn-primary block" ng-click="ctr.loadStats()">создать</button>
+      </div>
     </div>
   </div>
 </section>

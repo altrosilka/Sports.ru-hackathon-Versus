@@ -21,6 +21,8 @@ var vendorLibs = [
   './bower_components/angular-ui-router/release/angular-ui-router.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/tinycolor/tinycolor.js',
+  './bower_components/momentjs/moment.js',
+  './bower_components/momentjs/locale/ru.js',
   './bower_components/bootstrap-colorpickersliders/dist/bootstrap.colorpickersliders.js'
 ];
 

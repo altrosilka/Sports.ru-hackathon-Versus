@@ -19,9 +19,10 @@ angular.module('App').config([
         templateUrl: "templates/views/index.html"
       })
       .state('stats', {
-        url: "/stats/",
+        url: "/stats/?tag&c&t&s&tag1&t2&c2&s2",
         controller: 'CV_stats as ctr',
-        templateUrl: "templates/views/stats.html"
+        templateUrl: "templates/views/stats.html",
+        reloadOnSearch: false
       })
   }
 ]);

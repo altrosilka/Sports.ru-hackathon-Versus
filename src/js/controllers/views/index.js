@@ -4,20 +4,23 @@ angular.module('App').controller('CV_index', ['$state', '$q', '$scope', 'S_api',
   ctr.leftSideInfo = {
     selectedTournament: {},
     selectedSeason: {},
-    info: {}
+    info: {},
+    color: '#A6FF00'
   };
   ctr.rightSideInfo = {
     selectedTournament: {},
     selectedSeason: {},
-    info: {}
+    info: {},
+    color: '#FFA600'
   };
 
   $scope.$watch(function() {
     return ctr.leftSideInfo.info;
   }, function(tag) {
-    if (!tag) return;
+    if (!tag || !tag.name) return;
 
     ctr.leftSideInfo.info = tag;
+    ctr.leftSideInfo.preloadingTagInfo = true;
 
     $q.all({
       image: S_utils.loadImage(tag.img),
@@ -26,17 +29,15 @@ angular.module('App').controller('CV_index', ['$state', '$q', '$scope', 'S_api',
       ctr.leftSideInfo.preloadingTagInfo = false;
       ctr.leftSideInfo.tournaments = resp.tournaments.tournamet_list;
     });
-
-    ctr.leftSideInfo.preloadingTagInfo = true;
-
   });
 
   $scope.$watch(function() {
     return ctr.rightSideInfo.info;
   }, function(tag) {
-    if (!tag) return;
+    if (!tag || !tag.name) return;
 
     ctr.rightSideInfo.info = tag;
+    ctr.rightSideInfo.preloadingTagInfo = true;
 
     $q.all({
       image: S_utils.loadImage(tag.img),
@@ -45,9 +46,6 @@ angular.module('App').controller('CV_index', ['$state', '$q', '$scope', 'S_api',
       ctr.rightSideInfo.preloadingTagInfo = false;
       ctr.rightSideInfo.tournaments = resp.tournaments.tournamet_list;
     });
-
-    ctr.rightSideInfo.preloadingTagInfo = true;
-
   });
 
   ctr.getCollectorByKey = function(key) {
@@ -62,7 +60,6 @@ angular.module('App').controller('CV_index', ['$state', '$q', '$scope', 'S_api',
     switch (type) {
       case 'tour':
         {
-
           if (ctr.getCollectorByKey(key).selectedTournament.name !== param.name) {
             ctr.getCollectorByKey(key).selectedSeason = {};
           }
@@ -77,6 +74,10 @@ angular.module('App').controller('CV_index', ['$state', '$q', '$scope', 'S_api',
           break;
         }
     }
+  }
+
+  ctr.setColor = function(event, key) {
+    ctr.getCollectorByKey(key).color = event.currentTarget.value;
   }
 
   ctr.paramIsActive = function(key, param, type) {
@@ -106,6 +107,10 @@ angular.module('App').controller('CV_index', ['$state', '$q', '$scope', 'S_api',
     return ctr.getCollectorByKey(key).selectedSeason.name;
   }
 
+  ctr.showTagPreloader = function(key) {
+    return ctr.getCollectorByKey(key).preloadingTagInfo === true;
+  }
+
   ctr.statsButtonIsActive = function() {
     return (ctr.rightSideInfo.info.name) ? ctr.seasonIsSelected(0) && ctr.seasonIsSelected(1) : ctr.seasonIsSelected(0);
   }
@@ -126,6 +131,29 @@ angular.module('App').controller('CV_index', ['$state', '$q', '$scope', 'S_api',
     return (!ctr.selectedParams[key].description) ? 'Выберите параметр' : ctr.selectedParams[key].description;
   }
 
+  ctr.loadStats = function() {
+    if (ctr.statsButtonIsActive()) {
+      if (ctr.seasonIsSelected(1)) {
+        $state.go('^.stats', {
+          tag: ctr.leftSideInfo.info.id,
+          c: ctr.leftSideInfo.color.replace('#', ''),
+          t: ctr.leftSideInfo.selectedTournament.id,
+          s: ctr.leftSideInfo.selectedSeason.id,
+          tag2: ctr.rightSideInfo.info.id,
+          c2: ctr.rightSideInfo.color.replace('#', ''),
+          t2: ctr.rightSideInfo.selectedTournament.id,
+          s2: ctr.rightSideInfo.selectedSeason.id
+        });
+      } else {
+        $state.go('^.stats', {
+          tag: ctr.leftSideInfo.info.id,
+          c: ctr.leftSideInfo.color.replace('#', ''),
+          t: ctr.leftSideInfo.selectedTournament.id,
+          s: ctr.leftSideInfo.selectedSeason.id
+        });
+      }
+    }
+  }
 
   return ctr;
 }]);
