@@ -3,19 +3,42 @@ angular.module('App')
     var service = {};
 
     var base = __api.base;
+    var baseHack = __api.baseHack;
 
     service.searchByQuery = function(query) {
       return $http({
-        url: base + __api.paths.search,
+        url: baseHack + __api.paths.search,
         method: 'GET',
         params: {
           query: query,
-          only: 'tags'
+          only: 'players',
+          fav_sport: '208'
         }
       });
     }
 
-    service.getTournamentsList = function(tag) {
+    service.getTournamentsList = function(tag_id) {
+      return $http({
+        url: baseHack + __api.paths.getTournamentsList,
+        method: 'GET',
+        params: {
+          tag_id: tag_id
+        }
+      });
+    }
+
+    service.getTagStat = function(tag_id, tournament_id, season_id) {
+      return $http({
+        url: baseHack + __api.paths.getTagStat,
+        method: 'GET',
+        params: {
+          tag_id: tag_id,
+          season_id: season_id,
+          tournament_id: tournament_id
+        }
+      });
+    }
+    service._getTournamentsList = function(tag) {
       var defer = $q.defer();
       $timeout(function() {
         defer.resolve({
@@ -49,7 +72,7 @@ angular.module('App')
       return defer.promise;
     }
 
-    service.getTagStat = function(tag) {
+    service._getTagStat = function(tag) {
       var defer = $q.defer();
 
       $timeout(function() {
@@ -135,12 +158,12 @@ angular.module('App')
               teams: 'Спартак-Динамо',
               score: '0:2',
               goals: 4,
-              date: '2014-02-24' 
-            },{
+              date: '2014-02-24'
+            }, {
               teams: 'Спартак-Динамо',
               score: '0:6',
               goals: 7,
-              date: '2014-09-22' 
+              date: '2014-09-22'
             }],
             "matches_count": 12
           }

@@ -49,7 +49,7 @@
       font-size: 18px;
       white-space: nowrap;
     }
-    &.other {
+    &.other { 
       top: 50%;
       margin-top: -33px;
       transition: @stdTime;
@@ -99,7 +99,7 @@
       height: 490px;
       background-color: #222;
       position: relative;
-      transition: @stdTime;
+      transition: @fastTime;
       &.exec {
         height: 390px;
         .backimage {
@@ -130,7 +130,7 @@
           bottom: 0;
           background-repeat: no-repeat;
           background-position: center;
-          background-size: cover;
+          background-size: auto 100%;
           z-index: 1;
           transition: opacity 0.5s, visibility 0.5s;
           opacity: 0;
@@ -175,7 +175,7 @@
           height: 156px;
           margin-left: -78px;
           top: 40px;
-          border-radius: 50%;
+          border-radius: 78px;
           overflow: hidden;
           border: 3px solid;
           transition: border-color @fastTime;
@@ -239,7 +239,7 @@
         width: 50px;
         height: 50px;
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: 100% 100%;
         background-position: center;
       }
     }
@@ -300,6 +300,7 @@
               top: 67px;
               width: 150px;
               height: 150px;
+              border-radius: 75px;
             }
             .country {
               top: 230px;
@@ -411,7 +412,7 @@
               top: 0;
               background-repeat: no-repeat;
               background-position: center;
-              background-size: cover;
+              background-size: 391px;
             }
           }
           .left.carousel-control {
@@ -661,6 +662,19 @@
       }
     }
   }
+  .chart.empty {
+    position: relative;
+    &:after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color:#888;
+      content: 'Нет информации о забитых мячах';
+      font-size:14px;
+    }
+  }
   .soloChart {
     height: 350px;
   }
@@ -669,9 +683,9 @@
     height: 80px;
   }
   .resultsView {
-  	.inner{
-  		padding:15px 0!important;
-  	}
+    .inner {
+      padding: 15px 0!important;
+    }
     h3 {
       margin-left: 20%!important;
       margin-right: 20%!important;

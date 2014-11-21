@@ -1553,6 +1553,8 @@ body {
   background-color: #fff;
 }
 body > header {
+  position: relative;
+  z-index: 4;
   height: 36px;
   background: #000;
 }
@@ -1631,6 +1633,72 @@ body > header .left .gray:hover {
 }
 .stdMargin {
   margin: 25px;
+}
+.plat {
+  position: relative;
+  z-index: 4;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+.plat.lowIndex {
+  z-index: 2;
+}
+.plat.hideView {
+  opacity: 0;
+  visibility: hidden;
+}
+.heading.main {
+  color: #fff;
+  margin-top: 50px;
+}
+.skipIntro .heading.main {
+  display: none;
+}
+.presentation {
+  display: none;
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transition: 0.9s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.3s;
+  overflow: hidden;
+}
+.presentation .players {
+  position: absolute;
+  perspective: 600px;
+}
+.presentation .players .player {
+  width: 48px;
+  height: 48px;
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+  float: left;
+  transform-style: preserve-3d;
+  transition: 1s;
+}
+.presentation .players .player span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0.7;
+}
+.presentation .players .player.go {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1400px);
+}
+.skipIntro .presentation {
+  opacity: 0;
+  visibility: hidden;
+}
+body[data-state="index"] .presentation {
+  display: block;
 }
 .v_stats .loader {
   position: fixed;
@@ -1733,7 +1801,7 @@ body > header .left .gray:hover {
   height: 490px;
   background-color: #222;
   position: relative;
-  transition: 0.4s;
+  transition: 0.2s;
 }
 .v_stats .statsArea .background.exec {
   height: 390px;
@@ -1764,7 +1832,7 @@ body > header .left .gray:hover {
   bottom: 0;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: auto 100%;
   z-index: 1;
   transition: opacity 0.5s, visibility 0.5s;
   opacity: 0;
@@ -1809,7 +1877,7 @@ body > header .left .gray:hover {
   height: 156px;
   margin-left: -78px;
   top: 40px;
-  border-radius: 50%;
+  border-radius: 78px;
   overflow: hidden;
   border: 3px solid;
   transition: border-color 0.2s;
@@ -1873,7 +1941,7 @@ body > header .left .gray:hover {
   width: 50px;
   height: 50px;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
 }
 .v_stats .statsArea .versus .background.exec {
@@ -1933,6 +2001,7 @@ body > header .left .gray:hover {
   top: 67px;
   width: 150px;
   height: 150px;
+  border-radius: 75px;
 }
 .v_stats .statsArea .versus .background .info .player .country {
   top: 230px;
@@ -2036,7 +2105,7 @@ body > header .left .gray:hover {
   top: 0;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: 391px;
 }
 .v_stats .statsArea .photogal .photos .carousel .left.carousel-control {
   display: none;
@@ -2266,6 +2335,19 @@ body > header .left .gray:hover {
 .v_stats .overview .stroka .point.sm strong {
   font-size: 40px;
   margin-top: -7px;
+}
+.v_stats .chart.empty {
+  position: relative;
+}
+.v_stats .chart.empty:after {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #888;
+  content: 'Нет информации о забитых мячах';
+  font-size: 14px;
 }
 .v_stats .soloChart {
   height: 350px;

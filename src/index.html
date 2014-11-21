@@ -23,8 +23,8 @@
   <link href='https://fonts.googleapis.com/css?family=Ubuntu:300,700' rel='stylesheet' type='text/css'>
 </head>
 
-<body>
-
+<body ng-controller="C_root as ctr" data-state="{{state}}" ng-class="{'skipIntro':ctr.hidePlayers}">
+  <div class="presentation" many-peoples animate="ctr.hidePlayers"></div>
   <header>
     <div class="container relative">
       <a href="http://www.sports.ru" target="_blank" class="logo"></a>
@@ -34,14 +34,13 @@
       </span>
     </div>
   </header>
+  <div class="plat" ng-class="{'lowIndex':ctr.lowIndex, 'hideView':ctr.hideView}">
+    <section class="view" ui-view=""></section>
+  </div>
+  <script type="text/javascript" src="/pack/vendor.js?v=@@version"></script>
+  <script type="text/javascript" src="/pack/templates.js?v=@@version"></script>
+  <script type="text/javascript" src="/pack/scripts.js?v=@@version"></script>
 
-  <section class="view" ui-view>
-  </section>
-
-
-  <script type="text/javascript" src="pack/vendor.js?v=@@version"></script>
-  <script type="text/javascript" src="pack/templates.js?v=@@version"></script>
-  <script type="text/javascript" src="pack/scripts.js?v=@@version"></script>
 </body>
 
 </html>

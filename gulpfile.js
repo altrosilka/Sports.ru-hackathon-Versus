@@ -20,6 +20,9 @@ var vendorLibs = [
   './bower_components/jquery-ui/ui/sortable.js',
   './bower_components/lodash/dist/lodash.js',
   './bower_components/bootstrap/dist/js/bootstrap.js',
+  './bower_components/html2canvas/build/html2canvas.js',
+  './bower_components/FileSaver/FileSaver.js',
+  './bower_components/canvas-toBlob.js/canvas-toBlob.js',
   './bower_components/angular/angular.js',
   './bower_components/angular-sanitize/angular-sanitize.js',
   './bower_components/angular-ui-router/release/angular-ui-router.js',
@@ -31,6 +34,8 @@ var vendorLibs = [
   './bower_components/highcharts/highcharts.src.js',
   './bower_components/bootstrap-colorpickersliders/dist/bootstrap.colorpickersliders.js'
 ];
+
+
 
 
 gulp.task('scripts', function() {

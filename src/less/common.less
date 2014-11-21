@@ -8,6 +8,8 @@ body {
   font-weight: 300;
   background-color: #fff;
   > header {
+    position: relative;
+    z-index: 4;
     @headerHeight: 36px;
     height: @headerHeight;
     background: #000;
@@ -87,7 +89,27 @@ body {
     border-color: transparent;
   }
 }
-
-.stdMargin{
+.stdMargin {
   margin: 25px;
+}
+.view {} .plat {
+  position: relative;
+  z-index: 4;
+  transition: opacity 0.2s, visibility 0.2s;
+  &.lowIndex {
+    z-index: 2;
+  }
+  &.hideView {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.heading.main {
+  color: #fff;
+  margin-top:50px;
+}
+.skipIntro {
+  .heading.main {
+    display: none;
+  }
 }

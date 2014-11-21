@@ -17,35 +17,32 @@ angular.module('App').controller('CV_stats', [
     ctr.solo = {};
     ctr.versus = {};
 
-    ctr.yearsPlural = {
-      0: '',
-      one: '{} год',
-      few: '{} года',
-      many: '{} лет',
-      other: '{} года'
-    };
+
 
     if ($state.params.tag2) {
 
       ctr.oneTag = false;
 
       $q.all({
-        tag1: S_api.getTagStat($state.params.tag),
-        tag2: S_api.getTagStat($state.params.tag2)
+        tag1: S_api.getTagStat($state.params.tag, $state.params.t, $state.params.s),
+        tag2: S_api.getTagStat($state.params.tag2, $state.params.t2, $state.params.s2)
       }).then(function(resp) {
         ctr.preloadingInfo = false;
         var info = ctr.versus;
 
-        info.tag1 = resp.tag1;
-        info.tag2 = resp.tag2;
+        info.tag1 = resp.tag1.data;
+        info.tag2 = resp.tag2.data;
 
         info.mainImageIndex = 0;
-        info.background_images = S_utils.getVersusBackgrounds();
-        info.mainImage = info.background_images[0].url;
+        info.background_image = S_utils.getVersusBackgrounds();
+        info.mainImage = info.background_image[0].url;
 
         info.tag1.age = moment().diff(moment(info.tag1.birth_date, 'YYYY-MM-DD HH:mm:ss'), 'years');
         info.tag2.age = moment().diff(moment(info.tag2.birth_date, 'YYYY-MM-DD HH:mm:ss'), 'years');
 
+
+        info.tag1.age += ' ' + S_utils.plural(info.tag1.age, 'год','года','лет');
+        info.tag2.age += ' ' + S_utils.plural(info.tag2.age, 'год','года','лет');
 
         $q.all({
           avatar1: S_utils.loadImage(info.tag1.avatar),
@@ -61,18 +58,19 @@ angular.module('App').controller('CV_stats', [
       ctr.oneTag = true;
 
       $q.all({
-        tag: S_api.getTagStat($state.params.tag)
+        tag: S_api.getTagStat($state.params.tag, $state.params.t, $state.params.s)
       }).then(function(resp) {
         ctr.preloadingInfo = false;
 
 
-        ctr.solo = resp.tag;
+        ctr.solo = resp.tag.data;
 
         ctr.solo.mainImageIndex = 0;
-        ctr.solo.mainImage = resp.tag.background_images[0].url;
+        ctr.solo.mainImage = ctr.solo.background_image[0].url;
 
-        var date = moment(resp.tag.birth_date, 'YYYY-MM-DD HH:mm:ss');
+        var date = moment(ctr.solo.birth_date, 'YYYY-MM-DD HH:mm:ss');
         ctr.solo.age = moment().diff(date, 'years');
+        ctr.solo.age += ' ' + S_utils.plural(ctr.solo.age, 'год','года','лет');
         ctr.solo.birthdayHuman = date.format('D MMMM YYYY');
 
         $q.all({
@@ -116,7 +114,7 @@ angular.module('App').controller('CV_stats', [
     ctr.nextTagImage = function(key) {
       var info = ctr.getTagInfo(key);
       var q = info.mainImageIndex;
-      var l = info.background_images.length;
+      var l = info.background_image.length;
 
       if (q + 1 < l - 1) {
         info.mainImageIndex++;
@@ -124,11 +122,11 @@ angular.module('App').controller('CV_stats', [
         info.mainImageIndex = 0;
       }
 
-      info.mainImage = info.background_images[info.mainImageIndex].url;
+      info.mainImage = info.background_image[info.mainImageIndex].url;
     }
 
     ctr.toggleImage = function(key) {
-      var info = ctr.getTagInfo(key);
+      var info = ctr.getTagInfo(key); 
       info.witoutTopImage = !info.witoutTopImage;
     }
 
@@ -164,6 +162,15 @@ angular.module('App').controller('CV_stats', [
       return moment(date,'YYYY-MM-DD').format('DD.MM.YYYY');
     }
 
+    ctr.saveImage = function(){
+      ctr.savingInProgress = true;
+    }
+
+    ctr.thisIsEmptyTimeline = function(tl){
+      return _.max(tl, function(e) {
+          return e.goals_count;
+        }).goals_count === 0;
+    }
 
     return ctr;
   }

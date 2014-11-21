@@ -1,0 +1,50 @@
+.presentation {
+  display: none;
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transition: 0.9s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.3s;
+  overflow: hidden;
+  .players {
+    position: absolute;
+    perspective: 600px;
+    .player {
+      width: 48px;
+      height: 48px;
+      background-color: #000;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      float: left;
+      transform-style: preserve-3d;
+      transition: 1s;
+      span {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: #000;
+        opacity: 0.7;
+      }
+      &.go {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(1400px);
+
+      }
+    }
+  }
+}
+.skipIntro {
+  .presentation {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+body[data-state="index"] .presentation{
+  display: block;
+}

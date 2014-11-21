@@ -7,7 +7,7 @@ angular.module('App').directive('goalsTimeline', [function() {
     link: function($scope, $element, $attrs) {
       var chart;
       $scope.$watch('color', function(color) {
-        if (!color) return;
+        if (!color || !chart) return;
 
         if ($scope.data) {
           _.forEach(chart.highcharts().series, function(el) {
@@ -36,7 +36,7 @@ angular.module('App').directive('goalsTimeline', [function() {
         for (var i = 0; i < max; i++) {
           var arr = [];
           _.forEach(data, function(e) {
-            arr.push((e.goals_count >= i) ? 1 : 0);
+            arr.push((e.goals_count > i) ? 1 : 0);
           });
           series.push({
             data: arr,
@@ -44,6 +44,11 @@ angular.module('App').directive('goalsTimeline', [function() {
           });
         }
 
+        if(max === 0){
+          $element.addClass('empty')
+          return;
+        }
+        
         chart = $element.highcharts({
           chart: {
             type: 'column'

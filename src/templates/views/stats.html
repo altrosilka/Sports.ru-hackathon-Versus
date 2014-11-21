@@ -3,7 +3,7 @@
     <div class="loader" ng-class="{'active':ctr.preloadingInfo}">
       <i class="fa fa-futbol-o fa-spin loading"></i>
     </div>
-    <div class="statsArea" ng-class="{'active':ctr.readyToShow}">
+    <div class="statsArea" ng-class="{'active':ctr.readyToShow}" image-save-area="ctr.savingInProgress">
       <section ng-if="ctr.oneTag">
         <div class="background" ng-class="{'exec':ctr.witoutBackground(ctr.solo)}">
           <div class="rightComment" ng-click="ctr.toggleImage(ctr.solo);">
@@ -19,7 +19,7 @@
             </span>
           </div>
 
-          <div class="rightComment other" ng-click="ctr.nextTagImage(ctr.solo)">
+          <div class="rightComment other" ng-click="ctr.nextTagImage(ctr.solo)" ng-class="{'hideThis':ctr.witoutBackground(ctr.solo)}">
             <i class="fa fa-angle-right"></i>
             <div class="text">Другая
               <br>фотография</div>
@@ -118,7 +118,7 @@
             </div>
           </section>
 
-          <section class="stata full" ng-class="{'smalli':ctr.sectionIsBanned('timeline')}" data-panel-name="Распределение голов по минутам">
+          <section class="stata full" ng-if="!ctr.thisIsEmptyTimeline(ctr.solo.goals_timeline)" ng-class="{'smalli':ctr.sectionIsBanned('timeline')}" data-panel-name="Распределение голов по минутам">
             <span class="remove" ng-click="ctr.toggleSection('timeline')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('timeline')"><i class="fa fa-remove"></i>
               </span>
@@ -130,7 +130,7 @@
             </span>
             <div class="inner">
               <h3>Распределение голов по минутам</h3>
-              <div class="chart soloChart" goals-timeline="ctr.solo.stat.goals_timeline" color="ctr.getColor(0)"></div>
+              <div class="chart soloChart" goals-timeline="ctr.solo.goals_timeline" color="ctr.getColor(0)"></div>
             </div>
           </section>
 
@@ -156,7 +156,7 @@
           </section>
 
 
-          <section class="stata resultsView" ng-class="{'smalli':ctr.sectionIsBanned('resulted')}" data-panel-name="Самый результативный матч">
+          <section class="stata resultsView" ng-if="ctr.solo.stat.most_efficient_match.length" ng-class="{'smalli':ctr.sectionIsBanned('resulted')}" data-panel-name="Самый результативный матч">
             <span class="remove" ng-click="ctr.toggleSection('resulted')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('resulted')"><i class="fa fa-remove"></i>
               </span>
@@ -249,7 +249,7 @@
             <div class="player left">
               <div class="overview left">
                 <div class="point age">
-                  <strong ng-pluralize count="ctr.getTagInfo(0).age" when="ctr.yearsPlural"></strong>
+                  <strong ng-bind="ctr.getTagInfo(0).age"></strong>
                 </div>
                 <div class="point">Рост
                   <strong>
@@ -279,7 +279,7 @@
             <div class="player right">
               <div class="overview right">
                 <div class="point age">
-                  <strong ng-pluralize count="ctr.getTagInfo(1).age" when="ctr.yearsPlural"></strong>
+                  <strong ng-bind="ctr.getTagInfo(1).age" ></strong>
                 </div>
                 <div class="point">Рост
                   <strong>
@@ -483,10 +483,10 @@
               <h3>Распределение голов по минутам</h3>
               <div class="clearfix">
                 <div class="na2chart">
-                  <div class="chart" goals-timeline="ctr.getTagInfo(0).stat.goals_timeline" color="ctr.getColor(0)"></div>
+                  <div class="chart" goals-timeline="ctr.getTagInfo(0).goals_timeline" color="ctr.getColor(0)"></div>
                 </div>
                 <div class="na2chart">
-                  <div class="chart" goals-timeline="ctr.getTagInfo(1).stat.goals_timeline" color="ctr.getColor(1)"></div>
+                  <div class="chart" goals-timeline="ctr.getTagInfo(1).goals_timeline" color="ctr.getColor(1)"></div>
                 </div>
               </div>
             </div>
@@ -510,7 +510,7 @@
 
                   <div>
                     <carousel>
-                      <slide class="sslide" ng-repeat="slide in ctr.getTagInfo(0).background_images" active="slide.active">
+                      <slide class="sslide" ng-repeat="slide in ctr.getTagInfo(0).background_image" active="slide.active">
                         <img ng-src="{{slide.url}}" style="display:none;margin:auto;">
                         <div ng-style="{'background-image':'url('+slide.url+')'}"></div>
                       </slide>
@@ -520,9 +520,9 @@
 
                 </div>
                 <div class="na2">
-                  <div>
-                    <carousel>
-                      <slide class="sslide" ng-repeat="slide in ctr.getTagInfo(1).background_images" active="slide.active">
+                  <div> 
+                    <carousel> 
+                      <slide class="sslide" ng-repeat="slide in ctr.getTagInfo(1).background_image" active="slide.active">
                         <img ng-src="{{slide.url}}" style="display:none;margin:auto;">
                         <div ng-style="{'background-image':'url('+slide.url+')'}"></div>
                       </slide>
@@ -532,7 +532,7 @@
               </div>
             </div>
           </section>
-
+ 
 
           <section class="stata quoteView" ng-class="{'smalli':ctr.sectionIsBanned('quote')}" data-panel-name="Цитата">
             <span class="remove" ng-click="ctr.toggleSection('quote')">
@@ -559,5 +559,9 @@
         </div>
       </section>
     </div>
+
+    <footer>
+    	<div class="btn btn-primary saveButton" ng-click="ctr.saveImage()">Сохранить</div>
+    </footer>
   </div>
 </section>

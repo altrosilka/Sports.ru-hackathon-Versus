@@ -1,6 +1,6 @@
 {
   "name": "sports-hackathon-versus",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "authors": [
     "Egor M <me@megor.ru>"
   ],
@@ -27,6 +27,9 @@
     "tinycolor": "~1.1.0",
     "flag-icon-css": "~0.6.4",
     "angular-ui-sortable": "~0.13.1",
-    "jquery-ui": "~1.11.2"
+    "jquery-ui": "~1.11.2",
+    "html2canvas": "~0.4.1",
+    "FileSaver": "*",
+    "canvas-toBlob.js": "~0.1.3"
   }
 }

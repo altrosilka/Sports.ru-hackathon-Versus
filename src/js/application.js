@@ -4,4 +4,5 @@ var App = angular.module('App', [
   'ui.sortable',
   'ui.bootstrap',
   'templates'
-]);
+]); 
+ 
