@@ -1,4 +1,4 @@
-input[type="text"] {
+input[type="text"], textarea.form-control {
   border: 1px solid #DFDFDF;
   line-height: 30px;
   font-size: 15px;
@@ -8,6 +8,11 @@ input[type="text"] {
   &:focus {
     border-color: @baseColor;
   }
+}
+textarea.form-control{
+	line-height: 20px;
+	padding-top:10px;
+	padding-bottom:10px;
 }
 .btn {
   border: none;

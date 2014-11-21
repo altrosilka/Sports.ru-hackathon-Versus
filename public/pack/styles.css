@@ -1512,7 +1512,8 @@
 .flag-icon-zw.flag-icon-squared {
   background-image: url(../images/flags/zw.svg);
 }
-input[type="text"] {
+input[type="text"],
+textarea.form-control {
   border: 1px solid #DFDFDF;
   line-height: 30px;
   font-size: 15px;
@@ -1520,8 +1521,14 @@ input[type="text"] {
   box-shadow: none!important;
   outline: none!important;
 }
-input[type="text"]:focus {
+input[type="text"]:focus,
+textarea.form-control:focus {
   border-color: #630460;
+}
+textarea.form-control {
+  line-height: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .btn {
   border: none;
@@ -1953,9 +1960,100 @@ body > header .left .gray:hover {
   right: 25px;
   left: auto;
 }
+.v_stats .statsArea .versus .table {
+  background-color: #eee;
+  box-shadow: inset 0px 0px 20px #ccc;
+}
 .v_stats .statsArea .versus .table .stata {
-  border-bottom: 1px solid #eee;
+  border: 1px solid #eee;
+  margin: -1px -1px 0 -1px;
+  background-color: #fff;
   position: relative;
+}
+.v_stats .statsArea .versus .table .stata:after {
+  opacity: 0;
+  visibility: hidden;
+  content: attr(data-panel-name);
+  position: absolute;
+  color: #888;
+  left: 0;
+  top: 14px;
+  font-size: 14px;
+  right: 0;
+  text-align: center;
+}
+.v_stats .statsArea .versus .table .stata.std {
+  height: 124px;
+}
+.v_stats .statsArea .versus .table .stata.smalli {
+  height: 48px;
+}
+.v_stats .statsArea .versus .table .stata.smalli:after {
+  opacity: 1;
+  visibility: visible;
+}
+.v_stats .statsArea .versus .table .stata.smalli .inner {
+  overflow: hidden;
+  opacity: 0;
+}
+.v_stats .statsArea .versus .table .stata.smalli .reorder {
+  display: none;
+}
+.v_stats .statsArea .versus .table .stata .reorder {
+  position: absolute;
+  left: 10px;
+  font-size: 20px;
+  opacity: 0.2;
+  top: 10px;
+  cursor: move;
+  transition: 0.2s;
+  z-index: 2;
+}
+.v_stats .statsArea .versus .table .stata .reorder:hover {
+  opacity: 0.8;
+}
+.v_stats .statsArea .versus .table .stata .remove {
+  position: absolute;
+  right: -28px;
+  font-size: 23px;
+  opacity: 0.2;
+  top: 7px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.v_stats .statsArea .versus .table .stata .remove .x.r:after {
+  content: 'скрыть этот блок';
+}
+.v_stats .statsArea .versus .table .stata .remove .x.a {
+  position: relative;
+  left: 1px;
+  font-size: 20px;
+  top: -1px;
+}
+.v_stats .statsArea .versus .table .stata .remove .x.a:after {
+  content: 'показать этот блок';
+  left: 27px;
+  top: 2px;
+}
+.v_stats .statsArea .versus .table .stata .remove .x:after {
+  color: #000;
+  font-size: 14px;
+  position: absolute;
+  white-space: nowrap;
+  left: 25px;
+  top: 6px;
+  transition: 0.2s;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-10px);
+}
+.v_stats .statsArea .versus .table .stata .remove:hover {
+  opacity: 0.8;
+}
+.v_stats .statsArea .versus .table .stata .remove:hover .x:after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0px);
 }
 .v_stats .statsArea .versus .table .stata .ball {
   font-size: 24px;
@@ -2032,6 +2130,99 @@ body > header .left .gray:hover {
   top: 0;
   right: 0;
   margin: 10px 0 20px;
+}
+.v_stats .statsArea .cardes {
+  padding-bottom: 12px;
+  height: 66px;
+}
+.v_stats .statsArea .cardes .card {
+  width: 36px;
+  height: 46px;
+  background-size: 36px;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+}
+.v_stats .statsArea .cardes .card.r {
+  background-image: url(../images/rcard2x.png);
+}
+.v_stats .statsArea .cardes .card.y {
+  background-image: url(../images/ycard2x.png);
+  margin-left: 60px;
+}
+.v_stats .statsArea .cardes .na2 {
+  text-align: center;
+  width: 50%;
+  float: left;
+}
+.v_stats .statsArea .cardes .counter {
+  font-size: 50px;
+  font-weight: bold;
+  position: relative;
+  top: -5px;
+  left: 3px;
+}
+.v_stats .statsArea .photogal .inner {
+  padding: 20px 0!important;
+  transform: translate3d(0, 0, 0);
+}
+.v_stats .statsArea .photogal .photos .carousel {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 20px auto;
+}
+.v_stats .statsArea .photogal .photos .carousel .carousel-indicators {
+  display: none;
+}
+.v_stats .statsArea .photogal .photos .carousel .carousel-inner {
+  height: 100%;
+}
+.v_stats .statsArea .photogal .photos .carousel .sslide {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.v_stats .statsArea .photogal .photos .carousel .sslide div {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.v_stats .statsArea .photogal .photos .carousel .left.carousel-control {
+  display: none;
+}
+.v_stats .statsArea .photogal .photos .carousel .carousel-control {
+  display: block;
+  width: auto;
+  cursor: pointer;
+}
+.v_stats .statsArea .photogal .photos .carousel .glyphicon-chevron-right,
+.v_stats .statsArea .photogal .photos .carousel .glyphicon-chevron-left {
+  display: none;
+}
+.v_stats .statsArea .photogal .na2 {
+  width: 50%;
+  float: left;
+}
+.v_stats .statsArea .quoteView .inner {
+  padding: 25px 0 10px!important;
+}
+.v_stats .statsArea .quoteView .na2 {
+  float: left;
+  width: 50%;
+  padding: 25px;
+}
+.v_stats .statsArea .quoteView .na2 textarea {
+  height: 120px;
+  margin-bottom: 10px;
 }
 .v_index .tagsArea {
   position: relative;

@@ -338,9 +338,104 @@
         }
       }
       .table {
+        background-color: #eee;
+        box-shadow: inset 0px 0px 20px #ccc;
         .stata {
-          border-bottom: 1px solid #eee;
+          border: 1px solid #eee;
+          margin: -1px -1px 0 -1px;
+          background-color: #fff;
           position: relative;
+          &:after {
+            opacity: 0;
+            visibility: hidden;
+            content: attr(data-panel-name);
+            position: absolute;
+            color: #888;
+            left: 0;
+            top: 14px;
+            font-size: 14px;
+            right: 0;
+            text-align: center;
+          }
+          &.std {
+            height: 124px;
+          }
+          &.smalli {
+            height: 48px;
+            &:after {
+              opacity: 1;
+              visibility: visible;
+            }
+            .inner {
+              overflow: hidden;
+              opacity: 0;
+            }
+            .reorder {
+              display: none;
+            }
+          }
+          .reorder {
+            position: absolute;
+            left: 10px;
+            font-size: 20px;
+            opacity: 0.2;
+            top: 10px;
+            cursor: move;
+            transition: @fastTime;
+            z-index: 2;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+          .remove {
+            position: absolute;
+            right: -28px;
+            font-size: 23px;
+            opacity: 0.2;
+            top: 7px;
+            cursor: pointer;
+            transition: @fastTime;
+            .x {
+              &.r {
+                &:after {
+                  content: 'скрыть этот блок';
+                }
+              }
+              &.a {
+                position: relative;
+                left: 1px;
+                font-size: 20px;
+                top: -1px;
+              }
+              &.a:after {
+                content: 'показать этот блок';
+                left: 27px;
+                top: 2px;
+              }
+              &:after {
+                color: #000;
+                font-size: 14px;
+                position: absolute;
+                white-space: nowrap;
+                left: 25px;
+                top: 6px;
+                transition: 0.2s;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateX(-10px);
+              }
+            }
+            &:hover {
+              .x {
+                &:after {
+                  opacity: 1;
+                  visibility: visible;
+                  transform: translateX(0px);
+                }
+              }
+              opacity: 0.8;
+            }
+          }
           .ball {
             font-size: 24px;
             position: relative;
@@ -422,6 +517,105 @@
           }
         }
       }
+    }
+    .cardes {
+      padding-bottom: 12px;
+      height: 66px;
+      .card {
+        width: 36px;
+        height: 46px;
+        background-size: 36px;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: inline-block;
+        &.r {
+          background-image: url(../images/rcard2x.png);
+        }
+        &.y {
+          background-image: url(../images/ycard2x.png);
+          margin-left: 60px;
+        }
+      }
+      .na2 {
+        text-align: center;
+        width: 50%;
+        float: left;
+      }
+      .counter {
+        font-size: 50px;
+        font-weight: bold;
+        position: relative;
+        top: -5px;
+        left: 3px;
+      }
+    }
+    .photogal {
+      .inner {
+        padding: 20px 0!important;
+        transform: translate3d(0, 0, 0);
+      }
+      .photos {
+        .carousel {
+          width: 250px;
+          height: 250px;
+          overflow: hidden;
+          border-radius: 50%;
+          margin: 20px auto;
+          .carousel-indicators {
+            display: none;
+          }
+          .carousel-inner {
+            height: 100%;
+          }
+          .sslide {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            div {
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              top: 0;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;
+            }
+          }
+          .left.carousel-control {
+            display: none;
+          }
+          .carousel-control {
+            display: block;
+            width: auto;
+            cursor: pointer;
+          }
+          .glyphicon-chevron-right, .glyphicon-chevron-left {
+            display: none;
+          }
+        }
+      }
+      .na2 {
+        width: 50%;
+        float: left;
+      }
+    }
+    .quoteView{
+    	.inner{
+    		padding: 25px 0 10px!important;
+    	}
+    	.na2{
+    		float: left;
+    		width: 50%;
+    		padding: 25px;
+
+    		textarea{
+    			height: 120px;
+    			margin-bottom: 10px;
+    		}
+    	}
     }
   }
 }

@@ -137,6 +137,28 @@ angular.module('App').controller('CV_stats', [
       return ctr.getTagInfo(key).witoutTopImage;
     }
 
+    ctr.sortableOptions = {
+      axis: 'y',
+      handle: '.reorder'
+    }
+
+    ctr.bannedSections = [];
+
+    ctr.sectionIsBanned = function(section){
+      var el = _.find(ctr.bannedSections, function(num) { return num === section; });
+      return el;
+    }
+
+    ctr.toggleSection = function(section){
+      var el = _.remove(ctr.bannedSections, function(num) { return num === section; });
+
+      if (!el || !el.length){
+        ctr.bannedSections.push(section);
+      }
+    }
+
+    ctr.sliderInterval = 3000;
+
     return ctr;
   }
 ]);

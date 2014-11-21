@@ -203,10 +203,18 @@
 
         </div>
 
-        <div class="table" ui-sortable>
-          <section class="stata" data-tab="Матчи">
-            <span class="remove">
-              <i class="fa fa-remove"></i>
+        <div class="table" ui-sortable="ctr.sortableOptions">
+
+
+
+
+
+          <section class="stata std" ng-class="{'smalli':ctr.sectionIsBanned('matches_count')}" data-panel-name="Матчи">
+            <span class="remove" ng-click="ctr.toggleSection('matches_count')">
+              <span class="r x" ng-hide="ctr.sectionIsBanned('matches_count')"><i class="fa fa-remove"></i>
+              </span>
+              <span class="a x" ng-show="ctr.sectionIsBanned('matches_count')"><i class="fa fa-check"></i>
+              </span>
             </span>
             <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
@@ -231,9 +239,12 @@
             </div>
           </section>
 
-          <section class="stata" data-tab="Голы">
-            <span class="remove">
-              <i class="fa fa-remove"></i>
+          <section class="stata std" ng-class="{'smalli':ctr.sectionIsBanned('goals')}" data-panel-name="Голы">
+            <span class="remove" ng-click="ctr.toggleSection('goals')">
+              <span class="r x" ng-hide="ctr.sectionIsBanned('goals')"><i class="fa fa-remove"></i>
+              </span>
+              <span class="a x" ng-show="ctr.sectionIsBanned('goals')"><i class="fa fa-check"></i>
+              </span>
             </span>
             <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
@@ -251,9 +262,12 @@
             </div>
           </section>
 
-          <section class="stata" data-tab="Передачи">
-            <span class="remove">
-              <i class="fa fa-remove"></i>
+          <section class="stata std" ng-class="{'smalli':ctr.sectionIsBanned('goal_passes')}" data-panel-name="Передачи">
+            <span class="remove" ng-click="ctr.toggleSection('goal_passes')">
+              <span class="r x" ng-hide="ctr.sectionIsBanned('goal_passes')"><i class="fa fa-remove"></i>
+              </span>
+              <span class="a x" ng-show="ctr.sectionIsBanned('goal_passes')"><i class="fa fa-check"></i>
+              </span>
             </span>
             <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
@@ -269,9 +283,12 @@
             </div>
           </section>
 
-          <section class="stata rest" data-tab="Минут на результативное действие">
-            <span class="remove">
-              <i class="fa fa-remove"></i>
+          <section class="stata rest std" ng-class="{'smalli':ctr.sectionIsBanned('efficient_minutes')}" data-panel-name="Минут на результативное действие">
+            <span class="remove" ng-click="ctr.toggleSection('efficient_minutes')">
+              <span class="r x" ng-hide="ctr.sectionIsBanned('efficient_minutes')"><i class="fa fa-remove"></i>
+              </span>
+              <span class="a x" ng-show="ctr.sectionIsBanned('efficient_minutes')"><i class="fa fa-check"></i>
+              </span>
             </span>
             <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
@@ -289,9 +306,40 @@
             </div>
           </section>
 
-          <section class="stata full" data-tab="Распределение голов по минутам">
-           <span class="remove">
-              <i class="fa fa-remove"></i>
+          <section class="stata " ng-class="{'smalli':ctr.sectionIsBanned('cardes')}" data-panel-name="Карточки">
+            <span class="remove" ng-click="ctr.toggleSection('cardes')">
+              <span class="r x" ng-hide="ctr.sectionIsBanned('cardes')"><i class="fa fa-remove"></i>
+              </span>
+              <span class="a x" ng-show="ctr.sectionIsBanned('cardes')"><i class="fa fa-check"></i>
+              </span>
+            </span>
+            <span class="reorder" data-role="reorder">
+              <i class="fa fa-bars"></i>
+            </span>
+            <div class="inner">
+              <div class="clearfix cardes">
+                <div class="na2">
+                  <span class="card r"></span>
+                  <span class="counter" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.red_cards"></span>
+                  <span class="card y"></span>
+                  <span class="counter" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.yellow_cards"></span>
+                </div>
+                <div class="na2">
+                  <span class="card r"></span>
+                  <span class="counter" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.red_cards"></span>
+                  <span class="card y"></span>
+                  <span class="counter" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.yellow_cards"></span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="stata full" ng-class="{'smalli':ctr.sectionIsBanned('timeline')}" data-panel-name="Распределение голов по минутам">
+            <span class="remove" ng-click="ctr.toggleSection('timeline')">
+              <span class="r x" ng-hide="ctr.sectionIsBanned('timeline')"><i class="fa fa-remove"></i>
+              </span>
+              <span class="a x" ng-show="ctr.sectionIsBanned('timeline')"><i class="fa fa-check"></i>
+              </span>
             </span>
             <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
@@ -308,6 +356,71 @@
               </div>
             </div>
           </section>
+
+
+
+          <section class="stata photogal" ng-class="{'smalli':ctr.sectionIsBanned('photos')}" data-panel-name="Фотогалерея">
+            <span class="remove" ng-click="ctr.toggleSection('photos')">
+              <span class="r x" ng-hide="ctr.sectionIsBanned('photos')"><i class="fa fa-remove"></i>
+              </span>
+              <span class="a x" ng-show="ctr.sectionIsBanned('photos')"><i class="fa fa-check"></i>
+              </span>
+            </span>
+            <span class="reorder" data-role="reorder">
+              <i class="fa fa-bars"></i>
+            </span>
+            <div class="inner">
+              <div class="clearfix photos">
+                <div class="na2">
+
+                  <div>
+                    <carousel>
+                      <slide class="sslide" ng-repeat="slide in ctr.getTagInfo(0).background_images" active="slide.active">
+                        <img ng-src="{{slide.url}}" style="display:none;margin:auto;">
+                        <div ng-style="{'background-image':'url('+slide.url+')'}"></div>
+                      </slide>
+                    </carousel>
+                  </div>
+
+
+                </div>
+                <div class="na2">
+                  <div>
+                    <carousel>
+                      <slide class="sslide" ng-repeat="slide in ctr.getTagInfo(1).background_images" active="slide.active">
+                        <img ng-src="{{slide.url}}" style="display:none;margin:auto;">
+                        <div ng-style="{'background-image':'url('+slide.url+')'}"></div>
+                      </slide>
+                    </carousel>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+          <section class="stata quoteView" ng-class="{'smalli':ctr.sectionIsBanned('quote')}" data-panel-name="Цитата">
+            <span class="remove" ng-click="ctr.toggleSection('quote')">
+              <span class="r x" ng-hide="ctr.sectionIsBanned('quote')"><i class="fa fa-remove"></i>
+              </span>
+              <span class="a x" ng-show="ctr.sectionIsBanned('quote')"><i class="fa fa-check"></i>
+              </span>
+            </span>
+            <span class="reorder" data-role="reorder">
+              <i class="fa fa-bars"></i>
+            </span>
+            <div class="inner clearfix">
+              <div class="na2">
+                <textarea class="form-control" ng-model="ctr.getTagInfo(0).quote" placeholder="Сюда вы можете написать цитату об игроке"></textarea>
+                <input class="form-control" type="text" ng-model="ctr.getTagInfo(0).quoteAuthor" placeholder="Подпись к цитате">
+              </div>
+              <div class="na2">
+                <textarea class="form-control" ng-model="ctr.getTagInfo(1).quote" placeholder="Сюда вы можете написать цитату об игроке"></textarea>
+                <input class="form-control" type="text" ng-model="ctr.getTagInfo(1).quoteAuthor" placeholder="Подпись к цитате">
+              </div>
+            </div>
+          </section>
+
         </div>
       </section>
     </div>
