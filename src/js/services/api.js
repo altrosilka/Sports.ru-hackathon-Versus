@@ -27,6 +27,26 @@ angular.module('App')
       });
     }
 
+    service.saveLocationState = function(params) {
+      return $http({
+        url: baseHack + __api.paths.saveLocationState,
+        method: 'GET',
+        params: {
+          info: params
+        }
+      });
+    }
+
+    service.getLocationStateById = function(id) {
+      return $http({
+        url: baseHack + __api.paths.getLocationStateById,
+        method: 'GET',
+        params: {
+          id: id
+        }
+      });
+    }
+
     service.getTagStat = function(tag_id, tournament_id, season_id) {
       return $http({
         url: baseHack + __api.paths.getTagStat,

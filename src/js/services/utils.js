@@ -1,5 +1,5 @@
 angular.module('App')
-  .service('S_utils', ['$q', function($q) {
+  .service('S_utils', ['$q', '$modal', '__api', function($q, $modal, __api) {
     var service = {};
 
     service.loadImage = function(src) {
@@ -49,6 +49,27 @@ angular.module('App')
       }, {
         url: '/images/versus-bg/fvs07.png'
       }];
+    }
+
+    service.openSharePopup = function(url, title, w, h) {
+      w = w || 900;
+      h = h || 600;
+      var left = (screen.width / 2) - (w / 2);
+      var top = (screen.height / 2) - (h / 2);
+      return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+    }
+
+    service.openCopyPopup = function(url) {
+      $modal.open({
+        templateUrl: 'templates/other/copyLink.html',
+        controller: 'CM_copy as ctr',
+        size: 'md',
+        resolve: {
+          url: function() {
+            return url;
+          }
+        }
+      });
     }
 
     service.getContrastColor = function(hex) {

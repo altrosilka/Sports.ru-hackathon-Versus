@@ -1,10 +1,17 @@
 .v_stats {
+
+  &.viewer{
+    .rightComment, .reorder, .remove{
+      display: none;
+    }
+  }
+
   .loader {
     position: fixed;
     text-align: center;
     left: 50%;
     top: 50%;
-    z-index: 2;
+    z-index: 20;
     transform: scale(0.9);
     opacity: 0;
     margin: -26px 0 0 -26px;
@@ -17,6 +24,36 @@
     }
     &.active {
       transform: scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  .slash {
+    position: fixed;
+    background-color: #fff;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: @fastTime;
+    z-index: 18;
+    .text {
+      position: absolute;
+      top: 50%;
+      margin-top: 40px;
+      left: 10%;
+      right: 10%;
+      text-align: center;
+      font-size: 18px;
+      .gray {
+        display: block;
+        font-size: 12px;
+        margin-top: 6px;
+      }
+    }
+    &.active {
       opacity: 1;
       visibility: visible;
     }
@@ -49,7 +86,7 @@
       font-size: 18px;
       white-space: nowrap;
     }
-    &.other { 
+    &.other {
       top: 50%;
       margin-top: -33px;
       transition: @stdTime;
@@ -84,17 +121,19 @@
       cursor: pointer;
     }
   }
-  .statsArea {
+  .statsWrapper {
+    width: 670px;
+    margin: 60px auto 200px;
+    transition: @stdTime;
     opacity: 0;
     visibility: hidden;
-    transition: @stdTime;
-    width: 670px;
-    margin: 60px auto;
-    box-shadow: 0px 0px 20px #ddd;
     &.active {
       opacity: 1;
       visibility: visible;
     }
+  }
+  .statsArea {
+    box-shadow: 0px 0px 20px #ddd;
     .background {
       height: 490px;
       background-color: #222;
@@ -478,8 +517,7 @@
           visibility: visible;
         }
         .inner {
-          overflow: hidden;
-          opacity: 0;
+          display: none;
         }
         .reorder {
           display: none;
@@ -670,9 +708,9 @@
       left: 0;
       right: 0;
       text-align: center;
-      color:#888;
+      color: #888;
       content: 'Нет информации о забитых мячах';
-      font-size:14px;
+      font-size: 14px;
     }
   }
   .soloChart {
@@ -705,5 +743,87 @@
         }
       }
     }
+  }
+  .quoteRules {
+    .quote-author {
+      text-align: center;
+      font-size: 14px;
+    }
+    .quote-text {
+      font-size: 19px;
+      text-align: center;
+      line-height: 22px;
+      margin-bottom: 14px;
+    }
+    .quote-text, .quote-author {
+      display: none;
+    }
+  }
+  &.printed {
+    .reorder, .smalli, .quote-textarea, .quote-input, .black-input {
+      display: none!important;
+    }
+    .quote-text, .quote-author, .black-name {
+      display: block!important;
+    }
+  }
+  .blackFooter {
+    background: #000;
+    padding: 15px 25px;
+    .logo {
+      width: 140px;
+      height: 33px;
+      background: url(../images/logosports2x.png) center no-repeat;
+      background-size: 140px;
+    }
+    .black-input {
+      background-color: transparent;
+      color: #fff;
+      border-color: #555;
+      text-align: right;
+    }
+    .black-name {
+      display: none;
+      color: #FFF;
+      font-size: 16px;
+      padding: 6px 0px;
+    }
+  }
+  footer {
+    .saveButton {
+      height: 100%;
+      line-height: 38px;
+      width: 406px;
+      border-radius: 3px;
+      font-size: 20px;
+    }
+  }
+  .socials {
+    padding-top: 20px;
+    .button {
+      width: 50px;
+      height: 50px;
+      background: url(../images/ss.png) no-repeat;
+      background-size: 168px;
+      display: inline-block;
+      margin-left: 10px;
+      float: right;
+      cursor: pointer;
+      &.fb {
+        background-position: 0 0;
+      }
+      &.vk {
+        background-position: -59px 0;
+      }
+      &.tw {
+        background-position: -118px 0;
+      }
+      &.url {
+        background-position: -167px 0;
+      }
+    }
+  }
+  .table{
+    margin: 0;
   }
 }

@@ -1,178 +1,183 @@
-<section class="v_stats">
+<section class="v_stats" ng-class="{'printed':ctr.saveDocMode, 'viewer':ctr.observerMode}">
   <div class="container">
-    <div class="loader" ng-class="{'active':ctr.preloadingInfo}">
+    <div class="loader" ng-class="{'active':ctr.preloadingInfo || ctr.prepareSaveDoc}">
       <i class="fa fa-futbol-o fa-spin loading"></i>
     </div>
-    <div class="statsArea" ng-class="{'active':ctr.readyToShow}" image-save-area="ctr.savingInProgress">
-      <section ng-if="ctr.oneTag">
-        <div class="background" ng-class="{'exec':ctr.witoutBackground(ctr.solo)}">
-          <div class="rightComment" ng-click="ctr.toggleImage(ctr.solo);">
-            <span class="remove">
+    <div class="slash" ng-class="{'active':ctr.prepareSaveDoc}">
+      <div class="text">Генерируем изображение<span class="gray">это может занимать 5-10 секунд</span>
+      </div>
+    </div>
+    <div class="statsWrapper" ng-class="{'active':ctr.readyToShow}">
+      <div class="statsArea" image-save-area="ctr.savingInProgress" after-saving="ctr.afterSaving">
+        <section ng-if="ctr.oneTag">
+          <div class="background" ng-class="{'exec':ctr.withoutBackground(ctr.solo)}">
+            <div class="rightComment" ng-click="ctr.toggleImage(ctr.solo);">
+              <span class="remove">
               <i class="fa fa-times"></i>
               <div class="text">Удалить фоновую
                 <br>фотографию</div>
             </span>
-            <span class="add">
+              <span class="add">
               <i class="fa fa-check"></i>
               <div class="text">Показать фоновую
                 <br>фотографию</div>
             </span>
-          </div>
-
-          <div class="rightComment other" ng-click="ctr.nextTagImage(ctr.solo)" ng-class="{'hideThis':ctr.witoutBackground(ctr.solo)}">
-            <i class="fa fa-angle-right"></i>
-            <div class="text">Другая
-              <br>фотография</div>
-          </div>
-
-          <div class="backimage" set-bg-on-load="ctr.solo.mainImage" new-layer="true"></div>
-
-          <div class="info">
-            <div class="overview left">
-              <div class="point">Родился
-                <strong ng-bind="ctr.solo.birthdayHuman"></strong>
-              </div>
-              <div class="point">Возраст
-                <strong ng-bind="ctr.solo.age"></strong>
-              </div>
             </div>
-            <div class="overview right">
-              <div class="point">Рост
-                <strong>
+
+            <div class="rightComment other" ng-click="ctr.nextTagImage(ctr.solo)" ng-class="{'hideThis':ctr.withoutBackground(ctr.solo)}">
+              <i class="fa fa-angle-right"></i>
+              <div class="text">Другая
+                <br>фотография</div>
+            </div>
+
+            <div class="backimage" set-bg-on-load="ctr.solo.mainImage" new-layer="true"></div>
+
+            <div class="info">
+              <div class="overview left">
+                <div class="point">Родился
+                  <strong ng-bind="ctr.solo.birthdayHuman"></strong>
+                </div>
+                <div class="point">Возраст
+                  <strong ng-bind="ctr.solo.age"></strong>
+                </div>
+              </div>
+              <div class="overview right">
+                <div class="point">Рост
+                  <strong>
                   <span ng-bind="ctr.solo.height"></span>&nbsp;см</strong>
-              </div>
-              <div class="point">Вес
-                <strong>
+                </div>
+                <div class="point">Вес
+                  <strong>
                   <span ng-bind="ctr.solo.weight"></span>&nbsp;кг</strong>
+                </div>
               </div>
-            </div>
-            <div class="image" ng-style="{'background-image':'url('+ctr.solo.avatar+')','border-color':ctr.getColor(0)}"></div>
-            <div class="country">
-              <span class="flag" class="flag-icon" flag-icon="ctr.solo.flag.flag_code"></span>
-              <span class="title" ng-bind="ctr.solo.flag.flag_country"></span>
-            </div>
-            <h1>
+              <div class="image" ng-style="{'background-image':'url('+ctr.solo.avatar+')','border-color':ctr.getColor(0)}"></div>
+              <div class="country">
+                <span class="flag" class="flag-icon" flag-icon="ctr.solo.flag.flag_code"></span>
+                <span class="title" ng-bind="ctr.solo.flag.flag_country"></span>
+              </div>
+              <h1>
               <div ng-bind="ctr.solo.player_name"></div>
               <div ng-bind="ctr.solo.player_surname"></div>
             </h1>
-            <div class="tour">
-              <span ng-bind="ctr.solo.stat.tournament"></span>.&nbsp;
-              <span ng-bind="ctr.solo.stat.season"></span>
+              <div class="tour">
+                <span ng-bind="ctr.solo.stat.tournament"></span>.&nbsp;
+                <span ng-bind="ctr.solo.stat.season"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="teamReview" ng-style="{'background-color':ctr.getColor(0), 'color':ctr.getTextColor(0)}">
-          <div class="rightComment color">
-            <label>
-              <i class="fa fa-eyedropper"></i>
-              <div class="text">Изменить цвет</div>
-              <input type="text" class="colorPicker" placement="top" data-color-format="hex" tag-num="0" color-change="ctr.setColor(color, key)" color-picker="ctr.getColor(0)">
-            </label>
+          <div class="teamReview" ng-style="{'background-color':ctr.getColor(0), 'color':ctr.getTextColor(0)}">
+            <div class="rightComment color">
+              <label>
+                <i class="fa fa-eyedropper"></i>
+                <div class="text">Изменить цвет</div>
+                <input type="text" class="colorPicker" placement="top" data-color-format="hex" tag-num="0" color-change="ctr.setColor(color, key)" color-picker="ctr.getColor(0)">
+              </label>
+            </div>
+            <a class="name pull-left link no-border" ng-href="{{ctr.solo.team.tag_url}}" ng-bind="ctr.solo.team.name" ng-style="{'color':ctr.getTextColor(0)}"></a>
+            <a class="logo" target="_blank" ng-href="{{ctr.solo.team.tag_url}}" ng-style="{'background-image':'url('+ctr.solo.team.logo+')'}">
+            </a>
+            <span class="amplua pull-right" ng-bind="ctr.solo.amplua"></span>
           </div>
-          <a class="name pull-left link no-border" ng-href="{{ctr.solo.team.tag_url}}" ng-bind="ctr.solo.team.name" ng-style="{'color':ctr.getTextColor(0)}"></a>
-          <a class="logo" target="_blank" ng-href="{{ctr.solo.team.tag_url}}" ng-style="{'background-image':'url('+ctr.solo.team.logo+')'}">
-          </a>
-          <span class="amplua pull-right" ng-bind="ctr.solo.amplua"></span>
-        </div>
 
-        <div class="table" ui-sortable="ctr.sortableOptions">
+          <div custom-sorting-list="ctr.sortingList" set-new-list="ctr.setNewSortingList(list)" collect-param="ctr.currentUnix">
+            <div class="table" ui-sortable="ctr.sortableOptions">
 
-
-          <section class="stata overview" ng-class="{'smalli':ctr.sectionIsBanned('info')}" data-panel-name="Информация об игроке">
-            <span class="remove" ng-click="ctr.toggleSection('info')">
+              <section class="stata overview" ng-class="{'smalli':ctr.sectionIsBanned('info')}" data-panel-name="Информация об игроке" data-panel-id="info">
+                <span class="remove" ng-click="ctr.toggleSection('info')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('info')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('info')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('info')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
-              <i class="fa fa-bars"></i>
-            </span>
-            <div class="inner">
-              <div class="stroka">
-                <div class="point long">
-                  <span>Матчи</span>
-                  <strong ng-bind="ctr.solo.stat.matches_count" ng-style="{'color':ctr.getColor(0)}"></strong>
-                </div>
-                <div class="point">
-                  <span>Голы</span>
-                  <strong ng-bind="ctr.solo.stat.goals" ng-style="{'color':ctr.getColor(0)}"></strong><i class="fa fa-futbol-o ball"></i>
-                </div>
-                <div class="point">
-                  <span>Передачи</span>
-                  <strong ng-bind="ctr.solo.stat.goal_passes" ng-style="{'color':ctr.getColor(0)}"></strong>
-                </div>
-              </div>
-              <div class="stroka">
-                <div class="point sm long">
-                  <span>Минуты
+                </span>
+                <span class="reorder" data-role="reorder">
+                  <i class="fa fa-bars"></i>
+                </span>
+                <div class="inner">
+                  <div class="stroka">
+                    <div class="point long">
+                      <span>Матчи</span>
+                      <strong ng-bind="ctr.solo.stat.matches_count" ng-style="{'color':ctr.getColor(0)}"></strong>
+                    </div>
+                    <div class="point">
+                      <span>Голы</span>
+                      <strong ng-bind="ctr.solo.stat.goals" ng-style="{'color':ctr.getColor(0)}"></strong><i class="fa fa-futbol-o ball"></i>
+                    </div>
+                    <div class="point">
+                      <span>Передачи</span>
+                      <strong ng-bind="ctr.solo.stat.goal_passes" ng-style="{'color':ctr.getColor(0)}"></strong>
+                    </div>
+                  </div>
+                  <div class="stroka">
+                    <div class="point sm long">
+                      <span>Минуты
                     <br>на поле</span>
-                  <strong ng-bind="ctr.solo.stat.minutes" ng-style="{'color':ctr.getColor(0)}"></strong>
-                </div>
-                <div class="point sm long">
-                  <span>Минут на результативное
+                      <strong ng-bind="ctr.solo.stat.minutes" ng-style="{'color':ctr.getColor(0)}"></strong>
+                    </div>
+                    <div class="point sm long">
+                      <span>Минут на результативное
                     <br>действие</span>
-                  <strong ng-bind="ctr.solo.stat.efficient_minutes" ng-style="{'color':ctr.getColor(0)}"></strong>
+                      <strong ng-bind="ctr.solo.stat.efficient_minutes" ng-style="{'color':ctr.getColor(0)}"></strong>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </section>
+              </section>
 
-          <section class="stata full" ng-if="!ctr.thisIsEmptyTimeline(ctr.solo.goals_timeline)" ng-class="{'smalli':ctr.sectionIsBanned('timeline')}" data-panel-name="Распределение голов по минутам">
-            <span class="remove" ng-click="ctr.toggleSection('timeline')">
+              <section class="stata full" ng-if="!ctr.thisIsEmptyTimeline(ctr.solo.goals_timeline)" ng-class="{'smalli':ctr.sectionIsBanned('timeline')}" data-panel-name="Распределение голов по минутам" data-panel-id="timeline">
+                <span class="remove" ng-click="ctr.toggleSection('timeline')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('timeline')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('timeline')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('timeline')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner">
-              <h3>Распределение голов по минутам</h3>
-              <div class="chart soloChart" goals-timeline="ctr.solo.goals_timeline" color="ctr.getColor(0)"></div>
-            </div>
-          </section>
+                <div class="inner">
+                  <h3>Распределение голов по минутам</h3>
+                  <div class="chart soloChart" printed-mode="ctr.saveDocMode" goals-timeline="ctr.solo.goals_timeline" color="ctr.getColor(0)"></div>
+                </div>
+              </section>
 
 
-          <section class="stata " ng-class="{'smalli':ctr.sectionIsBanned('cardes')}" data-panel-name="Карточки">
-            <span class="remove" ng-click="ctr.toggleSection('cardes')">
+              <section class="stata " ng-class="{'smalli':ctr.sectionIsBanned('cardes')}" data-panel-name="Карточки" data-panel-id="cardes">
+                <span class="remove" ng-click="ctr.toggleSection('cardes')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('cardes')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('cardes')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('cardes')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner">
-              <div class="clearfix cardes text-center">
-                <span class="card r"></span>
-                <span class="counter" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.solo.stat.red_cards"></span>
-                <span class="card y"></span>
-                <span class="counter" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.solo.stat.yellow_cards"></span>
-              </div>
-            </div>
-          </section>
+                <div class="inner">
+                  <div class="clearfix cardes text-center">
+                    <span class="card r"></span>
+                    <span class="counter" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.solo.stat.red_cards"></span>
+                    <span class="card y"></span>
+                    <span class="counter" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.solo.stat.yellow_cards"></span>
+                  </div>
+                </div>
+              </section>
 
 
-          <section class="stata resultsView" ng-if="ctr.solo.stat.most_efficient_match.length" ng-class="{'smalli':ctr.sectionIsBanned('resulted')}" data-panel-name="Самый результативный матч">
-            <span class="remove" ng-click="ctr.toggleSection('resulted')">
+              <section class="stata resultsView" ng-show="ctr.solo.stat.most_efficient_match.length" ng-class="{'smalli':ctr.sectionIsBanned('resulted')}" data-panel-name="Самый результативный матч" data-panel-id="resulted">
+                <span class="remove" ng-click="ctr.toggleSection('resulted')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('resulted')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('resulted')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('resulted')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner clearfix">
-              <h3>Самый результативный матч</h3>
+                <div class="inner clearfix">
+                  <h3>Самый результативный матч</h3>
 
-              <div class="match" ng-repeat="match in ctr.solo.stat.most_efficient_match">
-                <div class="date" ng-bind="ctr.toHumanMatchDate(match.date)"></div>
-                <div class="clearfix">
-                  <span class="pull-left" style="width:169px">
+                  <div class="match" ng-repeat="match in ctr.solo.stat.most_efficient_match">
+                    <div class="date" ng-bind="ctr.toHumanMatchDate(match.date)"></div>
+                    <div class="clearfix">
+                      <span class="pull-left" style="width:169px">
                     <div>
                       <strong ng-bind="match.teams"></strong>
                     </div>
@@ -180,388 +185,404 @@
                       <strong ng-bind="match.score"></strong>
                     </div>
                   </span>
-                  <span class="pull-right goals">
+                      <span class="pull-right goals">
                     <strong ng-style="{'color':ctr.getColor(0)}" ng-bind="match.goals"></strong>
                     <i class="fa fa-futbol-o ball"></i>
                   </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </section>
+              </section>
 
-          <section class="stata quoteView" ng-class="{'smalli':ctr.sectionIsBanned('quote')}" data-panel-name="Цитата">
-            <span class="remove" ng-click="ctr.toggleSection('quote')">
+              <section class="stata quoteView" section-printed-mode="ctr.saveDocMode" ng-class="{'smalli':ctr.sectionIsBanned('quote')}" data-panel-name="Цитата" data-panel-id="quote">
+                <span class="remove" ng-click="ctr.toggleSection('quote')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('quote')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('quote')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('quote')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner clearfix stdMargin">
+                <div class="inner clearfix stdMargin quoteRules">
 
-              <textarea class="form-control soloTextarea" ng-model="ctr.solo.quote" placeholder="Сюда вы можете написать цитату об игроке"></textarea>
-              <input class="form-control" type="text" ng-model="ctr.solo.quoteAuthor" placeholder="Подпись к цитате">
+                  <textarea class="quote-textarea form-control soloTextarea" ng-model="ctr.solo.quote" placeholder="Сюда вы можете написать цитату об игроке"></textarea>
+                  <input class="quote-input form-control" type="text" ng-model="ctr.solo.quoteAuthor" placeholder="Подпись к цитате">
+                  <div class="quote-text" ng-bind="ctr.solo.quote">
+                  </div>
+                  <div class="quote-author" ng-bind="ctr.solo.quoteAuthor">
+                  </div>
 
+                </div>
+              </section>
             </div>
-          </section>
-
-
-        </div>
-
-      </section>
+          </div>
+        </section>
 
 
 
-
-
-
-
-      <section ng-if="!ctr.oneTag" class="versus">
-        <div class="background" ng-class="{'exec':ctr.witoutBackground(ctr.versus)}">
-          <div class="rightComment" ng-click="ctr.toggleImage(ctr.versus);">
-            <span class="remove">
+        <section ng-if="!ctr.oneTag" class="versus">
+          <div class="background" ng-class="{'exec':ctr.withoutBackground(ctr.versus)}">
+            <div class="rightComment" ng-click="ctr.toggleImage(ctr.versus);">
+              <span class="remove">
               <i class="fa fa-times"></i>
               <div class="text">Удалить фоновую
                 <br>фотографию</div>
             </span>
-            <span class="add">
+              <span class="add">
               <i class="fa fa-check"></i>
               <div class="text">Показать фоновую
                 <br>фотографию</div>
             </span>
-          </div>
+            </div>
 
-          <div class="rightComment other" ng-click="ctr.nextTagImage(ctr.versus)" ng-class="{'hideThis':ctr.witoutBackground(ctr.versus)}">
-            <i class="fa fa-angle-right"></i>
-            <div class="text">Другая
-              <br>фотография</div>
-          </div>
+            <div class="rightComment other" ng-click="ctr.nextTagImage(ctr.versus)" ng-class="{'hideThis':ctr.withoutBackground(ctr.versus)}">
+              <i class="fa fa-angle-right"></i>
+              <div class="text">Другая
+                <br>фотография</div>
+            </div>
 
-          <div class="backimage" set-bg-on-load="ctr.versus.mainImage" new-layer="true"></div>
+            <div class="backimage" set-bg-on-load="ctr.versus.mainImage" new-layer="true"></div>
 
-          <div class="colorImage left" ng-style="{'background-color':ctr.getColor(0)}"></div>
-          <div class="colorImage right" ng-style="{'background-color':ctr.getColor(1)}"></div>
+            <div class="colorImage left" ng-style="{'background-color':ctr.getColor(0)}"></div>
+            <div class="colorImage right" ng-style="{'background-color':ctr.getColor(1)}"></div>
 
-          <div class="info">
+            <div class="info">
 
-            <div class="player left">
-              <div class="overview left">
-                <div class="point age">
-                  <strong ng-bind="ctr.getTagInfo(0).age"></strong>
-                </div>
-                <div class="point">Рост
-                  <strong>
+              <div class="player left">
+                <div class="overview left">
+                  <div class="point age">
+                    <strong ng-bind="ctr.getTagInfo(0).age"></strong>
+                  </div>
+                  <div class="point">Рост
+                    <strong>
                     <span ng-bind="ctr.getTagInfo(0).height"></span>&nbsp;см</strong>
-                </div>
-                <div class="point">Вес
-                  <strong>
+                  </div>
+                  <div class="point">Вес
+                    <strong>
                     <span ng-bind="ctr.getTagInfo(0).weight"></span>&nbsp;кг</strong>
+                  </div>
                 </div>
-              </div>
 
-              <div class="image" ng-style="{'background-image':'url('+ctr.getTagInfo(0).avatar+')'}"></div>
-              <div class="country">
-                <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(0).flag.flag_code"></span>
-                <span class="title" ng-bind="ctr.getTagInfo(0).flag.flag_country"></span>
-              </div>
-              <h1>
+                <div class="image" ng-style="{'background-image':'url('+ctr.getTagInfo(0).avatar+')'}"></div>
+                <div class="country">
+                  <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(0).flag.flag_code"></span>
+                  <span class="title" ng-bind="ctr.getTagInfo(0).flag.flag_country"></span>
+                </div>
+                <h1>
                 <div ng-bind="ctr.getTagInfo(0).player_name"></div>
                 <div ng-bind="ctr.getTagInfo(0).player_surname"></div>
               </h1>
-              <div class="tour">
-                <span ng-bind="ctr.getTagInfo(0).stat.tournament"></span>
-                <span ng-bind="ctr.getTagInfo(0).stat.season"></span>
-              </div>
-            </div>
-
-            <div class="player right">
-              <div class="overview right">
-                <div class="point age">
-                  <strong ng-bind="ctr.getTagInfo(1).age" ></strong>
+                <div class="tour">
+                  <span ng-bind="ctr.getTagInfo(0).stat.tournament"></span>
+                  <span ng-bind="ctr.getTagInfo(0).stat.season"></span>
                 </div>
-                <div class="point">Рост
-                  <strong>
+              </div>
+
+              <div class="player right">
+                <div class="overview right">
+                  <div class="point age">
+                    <strong ng-bind="ctr.getTagInfo(1).age"></strong>
+                  </div>
+                  <div class="point">Рост
+                    <strong>
                     <span ng-bind="ctr.getTagInfo(1).height"></span>&nbsp;см</strong>
-                </div>
-                <div class="point">Вес
-                  <strong>
+                  </div>
+                  <div class="point">Вес
+                    <strong>
                     <span ng-bind="ctr.getTagInfo(1).weight"></span>&nbsp;кг</strong>
+                  </div>
                 </div>
-              </div>
 
-              <div class="image" ng-style="{'background-image':'url('+ctr.getTagInfo(1).avatar+')'}"></div>
-              <div class="country">
-                <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(1).flag.flag_code"></span>
-                <span class="title" ng-bind="ctr.getTagInfo(1).flag.flag_country"></span>
-              </div>
-              <h1>
+                <div class="image" ng-style="{'background-image':'url('+ctr.getTagInfo(1).avatar+')'}"></div>
+                <div class="country">
+                  <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(1).flag.flag_code"></span>
+                  <span class="title" ng-bind="ctr.getTagInfo(1).flag.flag_country"></span>
+                </div>
+                <h1>
                 <div ng-bind="ctr.getTagInfo(1).player_name"></div>
                 <div ng-bind="ctr.getTagInfo(1).player_surname"></div>
               </h1>
-              <div class="tour">
-                <span ng-bind="ctr.getTagInfo(1).stat.tournament"></span>
-                <span ng-bind="ctr.getTagInfo(1).stat.season"></span>
+                <div class="tour">
+                  <span ng-bind="ctr.getTagInfo(1).stat.tournament"></span>
+                  <span ng-bind="ctr.getTagInfo(1).stat.season"></span>
+                </div>
               </div>
+
+            </div>
+          </div>
+          <div class="teamReview">
+            <div class="rightComment color">
+              <label>
+                <i class="fa fa-eyedropper"></i>
+                <div class="text">Изменить цвет</div>
+                <input type="text" class="colorPicker" placement="top" data-color-format="hex" tag-num="1" color-change="ctr.setColor(color, key)" color-picker="ctr.getColor(1)">
+              </label>
+            </div>
+            <div class="rightComment color left">
+              <label>
+                <i class="fa fa-eyedropper"></i>
+                <div class="text">Изменить цвет</div>
+                <input type="text" class="colorPicker" placement="top" data-color-format="hex" tag-num="0" color-change="ctr.setColor(color, key)" color-picker="ctr.getColor(0)">
+              </label>
+            </div>
+
+            <div class="team" ng-style="{'background-color':ctr.getColor(0), 'color':ctr.getTextColor(0)}">
+              <a class="name link no-border" ng-href="{{ctr.getTagInfo(0).team.tag_url}}" ng-bind="ctr.getTagInfo(0).team.name" ng-style="{'color':ctr.getTextColor(0)}"></a>
+              <a class="logo" target="_blank" ng-href="{{ctr.getTagInfo(0).team.tag_url}}" ng-style="{'background-image':'url('+ctr.getTagInfo(0).team.logo+')'}">
+              </a>
+            </div>
+
+            <div class="team right" ng-style="{'background-color':ctr.getColor(1), 'color':ctr.getTextColor(1)}">
+              <a class="name link no-border" ng-href="{{ctr.getTagInfo(1).team.tag_url}}" ng-bind="ctr.getTagInfo(1).team.name" ng-style="{'color':ctr.getTextColor(1)}"></a>
+              <a class="logo" target="_blank" ng-href="{{ctr.getTagInfo(1).team.tag_url}}" ng-style="{'background-image':'url('+ctr.getTagInfo(1).team.logo+')'}">
+              </a>
             </div>
 
           </div>
-        </div>
-        <div class="teamReview">
-          <div class="rightComment color">
-            <label>
-              <i class="fa fa-eyedropper"></i>
-              <div class="text">Изменить цвет</div>
-              <input type="text" class="colorPicker" placement="top" data-color-format="hex" tag-num="1" color-change="ctr.setColor(color, key)" color-picker="ctr.getColor(1)">
-            </label>
-          </div>
-          <div class="rightComment color left">
-            <label>
-              <i class="fa fa-eyedropper"></i>
-              <div class="text">Изменить цвет</div>
-              <input type="text" class="colorPicker" placement="top" data-color-format="hex" tag-num="0" color-change="ctr.setColor(color, key)" color-picker="ctr.getColor(0)">
-            </label>
-          </div>
+          <div  custom-sorting-list="ctr.sortingList" set-new-list="ctr.setNewSortingList(list)" collect-param="ctr.currentUnix">
+            <div class="table" ui-sortable="ctr.sortableOptions">
 
-          <div class="team" ng-style="{'background-color':ctr.getColor(0), 'color':ctr.getTextColor(0)}">
-            <a class="name link no-border" ng-href="{{ctr.getTagInfo(0).team.tag_url}}" ng-bind="ctr.getTagInfo(0).team.name" ng-style="{'color':ctr.getTextColor(0)}"></a>
-            <a class="logo" target="_blank" ng-href="{{ctr.getTagInfo(0).team.tag_url}}" ng-style="{'background-image':'url('+ctr.getTagInfo(0).team.logo+')'}">
-            </a>
-          </div>
-
-          <div class="team right" ng-style="{'background-color':ctr.getColor(1), 'color':ctr.getTextColor(1)}">
-            <a class="name link no-border" ng-href="{{ctr.getTagInfo(1).team.tag_url}}" ng-bind="ctr.getTagInfo(1).team.name" ng-style="{'color':ctr.getTextColor(1)}"></a>
-            <a class="logo" target="_blank" ng-href="{{ctr.getTagInfo(1).team.tag_url}}" ng-style="{'background-image':'url('+ctr.getTagInfo(1).team.logo+')'}">
-            </a>
-          </div>
-
-        </div>
-
-        <div class="table" ui-sortable="ctr.sortableOptions">
-
-
-
-
-
-          <section class="stata std" ng-class="{'smalli':ctr.sectionIsBanned('matches_count')}" data-panel-name="Матчи">
-            <span class="remove" ng-click="ctr.toggleSection('matches_count')">
+              <section class="stata std" ng-class="{'smalli':ctr.sectionIsBanned('matches_count')}" data-panel-name="Матчи" data-panel-id="matches_count">
+                <span class="remove" ng-click="ctr.toggleSection('matches_count')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('matches_count')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('matches_count')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('matches_count')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
-              <i class="fa fa-bars"></i>
-            </span>
-            <div class="inner">
-              <h3>Матчи</h3>
-              <div class="left">
+                </span>
+                <span class="reorder" data-role="reorder">
+                  <i class="fa fa-bars"></i>
+                </span>
+                <div class="inner">
+                  <h3>Матчи</h3>
+                  <div class="left">
 
-                <span class="field lefter">
+                    <span class="field lefter">
                   минут на поле
                   <div class="subcount" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.minutes"></div>
                 </span>
-                <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.matches_count"></span>
-              </div>
-              <div class="right">
-                <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.matches_count"></span>
-                <span class="field">
+                    <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.matches_count"></span>
+                  </div>
+                  <div class="right">
+                    <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.matches_count"></span>
+                    <span class="field">
                   минут на поле
                   <div class="subcount" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.minutes"></div>
                 </span>
-              </div>
-            </div>
-          </section>
+                  </div>
+                </div>
+              </section>
 
-          <section class="stata std" ng-class="{'smalli':ctr.sectionIsBanned('goals')}" data-panel-name="Голы">
-            <span class="remove" ng-click="ctr.toggleSection('goals')">
+              <section class="stata std" ng-class="{'smalli':ctr.sectionIsBanned('goals')}" data-panel-name="Голы" data-panel-id="goals">
+                <span class="remove" ng-click="ctr.toggleSection('goals')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('goals')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('goals')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('goals')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner">
-              <h3>Голы</h3>
-              <div class="left">
-                <i class="fa fa-futbol-o ball"></i>
-                <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.goals"></span>
-              </div>
-              <div class="right">
-                <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.goals"></span>
-                <i class="fa fa-futbol-o ball"></i>
-              </div>
-            </div>
-          </section>
+                <div class="inner">
+                  <h3>Голы</h3>
+                  <div class="left">
+                    <i class="fa fa-futbol-o ball"></i>
+                    <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.goals"></span>
+                  </div>
+                  <div class="right">
+                    <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.goals"></span>
+                    <i class="fa fa-futbol-o ball"></i>
+                  </div>
+                </div>
+              </section>
 
-          <section class="stata std" ng-class="{'smalli':ctr.sectionIsBanned('goal_passes')}" data-panel-name="Передачи">
-            <span class="remove" ng-click="ctr.toggleSection('goal_passes')">
+              <section class="stata std" ng-class="{'smalli':ctr.sectionIsBanned('goal_passes')}" data-panel-name="Передачи" data-panel-id="goal_passes">
+                <span class="remove" ng-click="ctr.toggleSection('goal_passes')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('goal_passes')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('goal_passes')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('goal_passes')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner">
-              <h3>Передачи</h3>
-              <div class="left">
-                <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.goal_passes"></span>
-              </div>
-              <div class="right">
-                <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.goal_passes"></span>
-              </div>
-            </div>
-          </section>
+                <div class="inner">
+                  <h3>Передачи</h3>
+                  <div class="left">
+                    <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.goal_passes"></span>
+                  </div>
+                  <div class="right">
+                    <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.goal_passes"></span>
+                  </div>
+                </div>
+              </section>
 
-          <section class="stata rest std" ng-class="{'smalli':ctr.sectionIsBanned('efficient_minutes')}" data-panel-name="Минут на результативное действие">
-            <span class="remove" ng-click="ctr.toggleSection('efficient_minutes')">
+              <section class="stata rest std" ng-class="{'smalli':ctr.sectionIsBanned('efficient_minutes')}" data-panel-name="Минут на результативное действие" data-panel-id="efficient_minutes">
+                <span class="remove" ng-click="ctr.toggleSection('efficient_minutes')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('efficient_minutes')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('efficient_minutes')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('efficient_minutes')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner">
-              <h3>Минут на
+                <div class="inner">
+                  <h3>Минут на
                 <br>результативное
                 <br>действие</h3>
-              <div class="left">
-                <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.efficient_minutes"></span>
-              </div>
-              <div class="right">
-                <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.efficient_minutes"></span>
-              </div>
-            </div>
-          </section>
+                  <div class="left">
+                    <span class="count" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.efficient_minutes"></span>
+                  </div>
+                  <div class="right">
+                    <span class="count" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.efficient_minutes"></span>
+                  </div>
+                </div>
+              </section>
 
-          <section class="stata " ng-class="{'smalli':ctr.sectionIsBanned('cardes')}" data-panel-name="Карточки">
-            <span class="remove" ng-click="ctr.toggleSection('cardes')">
+              <section class="stata " ng-class="{'smalli':ctr.sectionIsBanned('cardes')}" data-panel-name="Карточки" data-panel-id="cardes">
+                <span class="remove" ng-click="ctr.toggleSection('cardes')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('cardes')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('cardes')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('cardes')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner">
-              <div class="clearfix cardes">
-                <div class="na2">
-                  <span class="card r"></span>
-                  <span class="counter" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.red_cards"></span>
-                  <span class="card y"></span>
-                  <span class="counter" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.yellow_cards"></span>
+                <div class="inner">
+                  <div class="clearfix cardes">
+                    <div class="na2">
+                      <span class="card r"></span>
+                      <span class="counter" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.red_cards"></span>
+                      <span class="card y"></span>
+                      <span class="counter" ng-style="{'color':ctr.getColor(0)}" ng-bind="ctr.getTagInfo(0).stat.yellow_cards"></span>
+                    </div>
+                    <div class="na2">
+                      <span class="card r"></span>
+                      <span class="counter" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.red_cards"></span>
+                      <span class="card y"></span>
+                      <span class="counter" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.yellow_cards"></span>
+                    </div>
+                  </div>
                 </div>
-                <div class="na2">
-                  <span class="card r"></span>
-                  <span class="counter" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.red_cards"></span>
-                  <span class="card y"></span>
-                  <span class="counter" ng-style="{'color':ctr.getColor(1)}" ng-bind="ctr.getTagInfo(1).stat.yellow_cards"></span>
-                </div>
-              </div>
-            </div>
-          </section>
+              </section>
 
-          <section class="stata full" ng-class="{'smalli':ctr.sectionIsBanned('timeline')}" data-panel-name="Распределение голов по минутам">
-            <span class="remove" ng-click="ctr.toggleSection('timeline')">
+              <section class="stata full" ng-class="{'smalli':ctr.sectionIsBanned('timeline')}" data-panel-name="Распределение голов по минутам" data-panel-id="timeline">
+                <span class="remove" ng-click="ctr.toggleSection('timeline')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('timeline')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('timeline')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('timeline')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner">
-              <h3>Распределение голов по минутам</h3>
-              <div class="clearfix">
-                <div class="na2chart">
-                  <div class="chart" goals-timeline="ctr.getTagInfo(0).goals_timeline" color="ctr.getColor(0)"></div>
+                <div class="inner">
+                  <h3>Распределение голов по минутам</h3>
+                  <div class="clearfix">
+                    <div class="na2chart">
+                      <div class="chart" printed-mode="ctr.saveDocMode" goals-timeline="ctr.getTagInfo(0).goals_timeline" color="ctr.getColor(0)"></div>
+                    </div>
+                    <div class="na2chart">
+                      <div class="chart" printed-mode="ctr.saveDocMode" goals-timeline="ctr.getTagInfo(1).goals_timeline" color="ctr.getColor(1)"></div>
+                    </div>
+                  </div>
                 </div>
-                <div class="na2chart">
-                  <div class="chart" goals-timeline="ctr.getTagInfo(1).goals_timeline" color="ctr.getColor(1)"></div>
-                </div>
-              </div>
-            </div>
-          </section>
+              </section>
 
 
 
-          <section class="stata photogal" ng-class="{'smalli':ctr.sectionIsBanned('photos')}" data-panel-name="Фотогалерея">
-            <span class="remove" ng-click="ctr.toggleSection('photos')">
+              <section class="stata photogal" ng-class="{'smalli':ctr.sectionIsBanned('photos')}" data-panel-name="Фотогалерея" data-panel-id="photos">
+                <span class="remove" ng-click="ctr.toggleSection('photos')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('photos')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('photos')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('photos')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner">
-              <div class="clearfix photos">
-                <div class="na2">
+                <div class="inner">
+                  <div class="clearfix photos">
+                    <div class="na2">
 
-                  <div>
-                    <carousel>
-                      <slide class="sslide" ng-repeat="slide in ctr.getTagInfo(0).background_image" active="slide.active">
-                        <img ng-src="{{slide.url}}" style="display:none;margin:auto;">
-                        <div ng-style="{'background-image':'url('+slide.url+')'}"></div>
-                      </slide>
-                    </carousel>
+                      <div>
+                        <carousel>
+                          <slide class="sslide" ng-repeat="slide in ctr.getTagInfo(0).background_image" active="slide.active">
+                            <img ng-src="{{slide.url}}" style="display:none;margin:auto;">
+                            <div ng-style="{'background-image':'url('+slide.url+')'}"></div>
+                          </slide>
+                        </carousel>
+                      </div>
+
+
+                    </div>
+                    <div class="na2">
+                      <div>
+                        <carousel>
+                          <slide class="sslide" ng-repeat="slide in ctr.getTagInfo(1).background_image" active="slide.active">
+                            <img ng-src="{{slide.url}}" style="display:none;margin:auto;">
+                            <div ng-style="{'background-image':'url('+slide.url+')'}"></div>
+                          </slide>
+                        </carousel>
+                      </div>
+                    </div>
                   </div>
-
-
                 </div>
-                <div class="na2">
-                  <div> 
-                    <carousel> 
-                      <slide class="sslide" ng-repeat="slide in ctr.getTagInfo(1).background_image" active="slide.active">
-                        <img ng-src="{{slide.url}}" style="display:none;margin:auto;">
-                        <div ng-style="{'background-image':'url('+slide.url+')'}"></div>
-                      </slide>
-                    </carousel>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
- 
+              </section>
 
-          <section class="stata quoteView" ng-class="{'smalli':ctr.sectionIsBanned('quote')}" data-panel-name="Цитата">
-            <span class="remove" ng-click="ctr.toggleSection('quote')">
+
+              <section class="stata quoteView" section-printed-mode="ctr.saveDocMode" ng-class="{'smalli':ctr.sectionIsBanned('quote')}" data-panel-name="Цитата" data-panel-id="quote">
+                <span class="remove" ng-click="ctr.toggleSection('quote')">
               <span class="r x" ng-hide="ctr.sectionIsBanned('quote')"><i class="fa fa-remove"></i>
               </span>
-              <span class="a x" ng-show="ctr.sectionIsBanned('quote')"><i class="fa fa-check"></i>
+                <span class="a x" ng-show="ctr.sectionIsBanned('quote')"><i class="fa fa-check"></i>
               </span>
-            </span>
-            <span class="reorder" data-role="reorder">
+                </span>
+                <span class="reorder" data-role="reorder">
               <i class="fa fa-bars"></i>
             </span>
-            <div class="inner clearfix">
-              <div class="na2">
-                <textarea class="form-control" ng-model="ctr.getTagInfo(0).quote" placeholder="Сюда вы можете написать цитату об игроке"></textarea>
-                <input class="form-control" type="text" ng-model="ctr.getTagInfo(0).quoteAuthor" placeholder="Подпись к цитате">
-              </div>
-              <div class="na2">
-                <textarea class="form-control" ng-model="ctr.getTagInfo(1).quote" placeholder="Сюда вы можете написать цитату об игроке"></textarea>
-                <input class="form-control" type="text" ng-model="ctr.getTagInfo(1).quoteAuthor" placeholder="Подпись к цитате">
-              </div>
+                <div class="inner clearfix quoteRules">
+                  <div class="na2">
+                    <textarea class="quote-textarea form-control" ng-model="ctr.getTagInfo(0).quote" placeholder="Сюда вы можете написать цитату об игроке"></textarea>
+                    <input class="quote-input form-control" type="text" ng-model="ctr.getTagInfo(0).quoteAuthor" placeholder="Подпись к цитате">
+                    <div class="quote-text" ng-bind="ctr.getTagInfo(0).quote">
+                    </div>
+                    <div class="quote-author" ng-bind="ctr.getTagInfo(0).quoteAuthor">
+                    </div>
+                  </div>
+                  <div class="na2">
+                    <textarea class="quote-textarea form-control" ng-model="ctr.getTagInfo(1).quote" placeholder="Сюда вы можете написать цитату об игроке"></textarea>
+                    <input class="quote-input form-control" type="text" ng-model="ctr.getTagInfo(1).quoteAuthor" placeholder="Подпись к цитате">
+                    <div class="quote-text" ng-bind="ctr.getTagInfo(1).quote">
+                    </div>
+                    <div class="quote-author" ng-bind="ctr.getTagInfo(1).quoteAuthor">
+                    </div>
+                  </div>
+                </div>
+              </section>
+
             </div>
-          </section>
+          </div>
+        </section>
+        <section class="blackFooter clearfix" footer-printed-mode="ctr.saveDocMode">
+          <div class="pull-left logo"></div>
+          <div class="pull-right">
+            <input type="text" placeholder="Ваше имя" ng-model="ctr.author" class="form-control black-input">
+            <span class="black-name" ng-bind="ctr.author"></span>
+          </div>
+
+        </section>
+      </div>
+      <footer>
+        <div social-buttons when-click="ctr.shareAction(type)">
 
         </div>
-      </section>
+        <div class="btn btn-primary saveButton" ng-click="ctr.saveImage()">Сохранить</div>
+      </footer>
     </div>
 
-    <footer>
-    	<div class="btn btn-primary saveButton" ng-click="ctr.saveImage()">Сохранить</div>
-    </footer>
+
   </div>
 </section>

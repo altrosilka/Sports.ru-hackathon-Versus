@@ -19,7 +19,7 @@ angular.module('App').config([
         templateUrl: "templates/views/index.html"
       })
       .state('stats', {
-        url: "/stats/?tag&c&t&s&tag2&t2&c2&s2",
+        url: "/stats/?tag&c&t&s&tag2&t2&c2&s2&info",
         controller: 'CV_stats as ctr',
         templateUrl: "templates/views/stats.html",
         reloadOnSearch: false

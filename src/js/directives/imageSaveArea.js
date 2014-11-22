@@ -1,7 +1,8 @@
-angular.module('App').directive('imageSaveArea', [function() {
+angular.module('App').directive('imageSaveArea', ['$timeout', function($timeout) {
   return {
     scope: {
-      save: '=imageSaveArea'
+      save: '=imageSaveArea',
+      complete: '=afterSaving'
     },
     link: function($scope, $element, $attrs) {
       $scope.$watch('save', function(val) {
@@ -14,14 +15,18 @@ angular.module('App').directive('imageSaveArea', [function() {
             width: w,
             useCORS: true,
             onrendered: function(canvas) {
-              canvas.toBlob(function(blob) {
-                saveAs(blob, "stats.png");
-              });
+              $timeout(function() {
+                canvas.toBlob(function(blob) {
+                  saveAs(blob, "sports_ru_stat_" + Math.random().toString(36).substring(13) + ".png");
+                  if (typeof $scope.complete === 'function') {
+                    $scope.complete();
+                  }
+                });
+              },500);
             }
           });
         }
       });
-
     }
   }
 }])

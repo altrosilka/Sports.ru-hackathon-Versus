@@ -2,10 +2,11 @@ angular.module('App').directive('goalsTimeline', [function() {
   return {
     scope: {
       data: '=goalsTimeline',
-      color: '='
+      color: '=',
+      printedMode: '='
     },
     link: function($scope, $element, $attrs) {
-      var chart;
+      var chart, $canvas;
       $scope.$watch('color', function(color) {
         if (!color || !chart) return;
 
@@ -15,6 +16,27 @@ angular.module('App').directive('goalsTimeline', [function() {
             el.options.color = color;
             el.update(el.options);
           })
+        }
+      });
+
+      $scope.$watch('printedMode', function(print, old) {
+        if (!print || !print || !chart) return;
+
+        if (print === true) {
+          var q = $element;
+          var w = q.width();
+          var h = q.height();
+          var id = "asge"+Math.random().toString(36).substring(7);
+          $canvas = $('<canvas class="weit" id="'+id+'" width="'+w+'px" height="'+h+'px"></canvas>').insertAfter($element);
+          var svg = chart.find('.highcharts-container').html();
+          
+          canvg(document.getElementById(id), svg);
+          $element.hide();
+        }
+
+        if (print === false && old === true) {
+          $canvas.remove();
+          $element.show();
         }
       });
 
