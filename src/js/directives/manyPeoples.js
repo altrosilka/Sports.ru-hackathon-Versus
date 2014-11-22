@@ -23,7 +23,7 @@ angular.module('App').directive('manyPeoples', [function() {
 
       var str = '';
       for (var i = 0; i < count; i++) {
-        str += '<div class="player" style="background-image: url(/images/faces/' + (i % l + 1) + '.jpeg)"><span></span></div>';
+        str += '<div class="player" style="background-image: url(images/faces/' + (i % l + 1) + '.jpeg)"><span></span></div>';
       }
 
 

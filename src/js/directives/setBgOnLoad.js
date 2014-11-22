@@ -3,7 +3,8 @@ angular.module('App')
     return {
       scope: {
         src: '=setBgOnLoad',
-        newLayer: '='
+        newLayer: '=',
+        listen: '='
       },
       link: function($scope, $element) {
         var layer;
@@ -26,11 +27,17 @@ angular.module('App')
           var time1 = new Date().getTime();
 
           if ($scope.newLayer) {
-            promise.then(function() {
+            promise.then(function(img) {
+              
               var oldLayers = $element.find('.layer');
               var layer = $(document.createElement('div')).addClass('layer').css({
                 "background-image": "url(" + $scope.src + ")"
               }).appendTo($element);
+
+              if ($scope.listen && img.width/img.height <1.3673469387755102){
+                layer.css('background-size','100%');
+              }
+
               $timeout(function() {
                 layer.addClass('active');
               }, 100);

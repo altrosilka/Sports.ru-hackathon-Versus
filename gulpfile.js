@@ -35,16 +35,17 @@ var vendorLibs = [
   './bower_components/bootstrap-colorpickersliders/dist/bootstrap.colorpickersliders.js'
 ];
 
+var BASE = 'infographic';
 
-
+var PACK_FOLDER = './public/'+BASE+'/pack';
 
 gulp.task('scripts', function() {
   gulp.src(['./src/js/**/*.js'])
     .pipe(concat('scripts.js'))
-    .pipe(gulp.dest('./public/pack'))
+    .pipe(gulp.dest(PACK_FOLDER))
   gulp.src(vendorLibs)
     .pipe(concat('vendor.js'))
-    .pipe(gulp.dest('./public/pack'))
+    .pipe(gulp.dest(PACK_FOLDER))
 });
 
 
@@ -52,17 +53,17 @@ gulp.task('scripts-deploy', function() {
   gulp.src(['./src/js/**/*.js'])
     .pipe(concat('scripts.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('./public/pack'))
+    .pipe(gulp.dest(PACK_FOLDER))
   gulp.src(vendorLibs)
     .pipe(concat('vendor.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('./public/pack'))
+    .pipe(gulp.dest(PACK_FOLDER))
 });
 
 gulp.task('less', function() {
   gulp.src('./src/less/styles.less')
     .pipe(less())
-    .pipe(gulp.dest('./public/pack'));
+    .pipe(gulp.dest(PACK_FOLDER));
 });
 
 gulp.task('vendors-styles', function() {
@@ -75,7 +76,7 @@ gulp.task('vendors-styles', function() {
       keepBreaks: true
     }))
     .pipe(concat('vendors.css'))
-    .pipe(gulp.dest('./public/pack'))
+    .pipe(gulp.dest(PACK_FOLDER))
 });
 
 gulp.task('templates', function() {
@@ -84,7 +85,7 @@ gulp.task('templates', function() {
       standalone: true,
       root: './templates/'
     }))
-    .pipe(gulp.dest('./public/pack'));
+    .pipe(gulp.dest(PACK_FOLDER));
 });
 
 gulp.task("watch", function() {
@@ -92,14 +93,14 @@ gulp.task("watch", function() {
   gulp.watch('./src/less/**', ["less"]);
   gulp.watch('./tmp/css/**', ["styles"]);
   gulp.watch('./src/templates/**', ["templates"]);
-  gulp.watch('./src/**/*.html', ["create-index"]);
+  gulp.watch('./src/**/*.php', ["create-index"]);
 });
 
 gulp.task('create-index', function() {
   var pkg = getPackageJson();
   var version = pkg.version;
 
-  gulp.src('./src/index.html')
+  gulp.src('./src/index.php')
     .pipe(replace({
       patterns: [{
         match: 'date',
@@ -109,10 +110,10 @@ gulp.task('create-index', function() {
         replacement: version
       }, {
         match: 'baseUrl',
-        replacement: '/'
+        replacement: '/'+BASE+'/'
       }]
     }))
-    .pipe(gulp.dest('./public'));
+    .pipe(gulp.dest('./public/'+BASE));
 });
 
 gulp.task('build', [

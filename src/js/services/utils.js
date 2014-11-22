@@ -35,19 +35,19 @@ angular.module('App')
 
     service.getVersusBackgrounds = function() {
       return [{
-        url: '/images/versus-bg/fvs01.png'
+        url: 'images/versus-bg/fvs01.png'
       }, {
-        url: '/images/versus-bg/fvs02.png'
+        url: 'images/versus-bg/fvs02.png'
       }, {
-        url: '/images/versus-bg/fvs03.png'
+        url: 'images/versus-bg/fvs03.png'
       }, {
-        url: '/images/versus-bg/fvs04.png'
+        url: 'images/versus-bg/fvs04.png'
       }, {
-        url: '/images/versus-bg/fvs05.png'
+        url: 'images/versus-bg/fvs05.png'
       }, {
-        url: '/images/versus-bg/fvs06.png'
+        url: 'images/versus-bg/fvs06.png'
       }, {
-        url: '/images/versus-bg/fvs07.png'
+        url: 'images/versus-bg/fvs07.png'
       }];
     }
 

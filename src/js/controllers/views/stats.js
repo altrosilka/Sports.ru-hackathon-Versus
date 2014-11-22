@@ -45,6 +45,10 @@ angular.module('App').controller('CV_stats', [
       promise = defer.promise;
 
       S_api.getLocationStateById($state.params.info).then(function(data) {
+        if (data.data.info === false){
+          $state.go('^.index');
+          return;
+        }
         var obj = JSON.parse(data.data.info);
         var storedLocation = {};
         storedLocation.tag = obj.tag;
@@ -294,6 +298,10 @@ angular.module('App').controller('CV_stats', [
         obj.sorting = ctr.sortingList;
         obj.author = ctr.author;
 
+
+        obj.player1_name = ctr.solo.player_name;
+        obj.player1_surname = ctr.solo.player_surname;
+
         S_api.saveLocationState(obj).then(function(resp) {
           ctr.savedConfigId = resp.data.id;
           ctr.sharingInProgress = false;
@@ -313,6 +321,11 @@ angular.module('App').controller('CV_stats', [
         obj.c2 = color2;
         obj.t2 = storedLocation.t2;
 
+        obj.player1_name = ctr.getTagInfo(0).player_name;
+        obj.player1_surname = ctr.getTagInfo(0).player_surname;
+        obj.player2_name = ctr.getTagInfo(1).player_name;
+        obj.player2_surname = ctr.getTagInfo(1).player_surname;
+
         obj.sorting = ctr.sortingList;
         obj.author = ctr.author;
 
@@ -325,7 +338,7 @@ angular.module('App').controller('CV_stats', [
     }
 
     function shareFunc(id, type) {
-      var shareUrl = __introDomain + '/stats/?info=' + id;
+      var shareUrl = __introDomain + '/infographic/stats/?info=' + id;
       switch (type) {
         case 'fb':
           {

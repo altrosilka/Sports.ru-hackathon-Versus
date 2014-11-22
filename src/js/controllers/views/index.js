@@ -11,12 +11,14 @@ angular.module('App').controller('CV_index', [
     ctr.leftSideInfo = {
       selectedTournament: {},
       selectedSeason: {},
-      info: {}
+      info: {},
+      color: '#DA8BA3'
     };
     ctr.rightSideInfo = {
       selectedTournament: {},
       selectedSeason: {},
-      info: {}
+      info: {},
+      color: '#DA8BA3'
     };
 
     $scope.$watch(function() {
@@ -84,7 +86,6 @@ angular.module('App').controller('CV_index', [
     }
 
     ctr.setColor = function(event, key) {
-      debugger
       ctr.getCollectorByKey(key).color = event.currentTarget.value;
     }
 
@@ -140,7 +141,6 @@ angular.module('App').controller('CV_index', [
     }
 
     ctr.loadStats = function() {
-      debugger
       if (ctr.statsButtonIsActive()) {
         if (ctr.seasonIsSelected(1)) {
           $state.go('^.stats', {

@@ -1,11 +1,20 @@
 .v_stats {
-
-  &.viewer{
-    .rightComment, .reorder, .remove{
+  &.viewer {
+    .rightComment, .reorder, .remove {
       display: none;
     }
   }
-
+  .versusIcon {
+    width: 120px;
+    height: 76px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2; 
+    margin: -38px 0 0 -65px;
+    background: url(../images/vs.png) center no-repeat;
+    background-size: 120px;
+  }
   .loader {
     position: fixed;
     text-align: center;
@@ -804,7 +813,7 @@
       width: 50px;
       height: 50px;
       background: url(../images/ss.png) no-repeat;
-      background-size: 168px;
+      background-size: 227px;
       display: inline-block;
       margin-left: 10px;
       float: right;
@@ -819,11 +828,11 @@
         background-position: -118px 0;
       }
       &.url {
-        background-position: -167px 0;
+        background-position: -177px 0;
       }
     }
   }
-  .table{
+  .table {
     margin: 0;
   }
 }

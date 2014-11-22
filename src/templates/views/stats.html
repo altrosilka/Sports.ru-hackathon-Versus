@@ -30,7 +30,7 @@
                 <br>фотография</div>
             </div>
 
-            <div class="backimage" set-bg-on-load="ctr.solo.mainImage" new-layer="true"></div>
+            <div class="backimage" set-bg-on-load="ctr.solo.mainImage" listen="true" new-layer="true"></div>
 
             <div class="info">
               <div class="overview left">
@@ -51,10 +51,10 @@
                   <span ng-bind="ctr.solo.weight"></span>&nbsp;кг</strong>
                 </div>
               </div>
-              <div class="image" ng-style="{'background-image':'url('+ctr.solo.avatar+')','border-color':ctr.getColor(0)}"></div>
+              <a class="image" ng-href="{{ctr.solo.tag_url}}" target="_blank" ng-style="{'background-image':'url('+ctr.solo.avatar+')','border-color':ctr.getColor(0)}"></a>
               <div class="country">
-                <span class="flag" class="flag-icon" flag-icon="ctr.solo.flag.flag_code"></span>
-                <span class="title" ng-bind="ctr.solo.flag.flag_country"></span>
+                <span class="flag" class="flag-icon" flag-icon="ctr.solo.flag_short"></span>
+                <span class="title" ng-bind="ctr.solo.flag_country"></span>
               </div>
               <h1>
               <div ng-bind="ctr.solo.player_name"></div>
@@ -247,6 +247,8 @@
             <div class="colorImage left" ng-style="{'background-color':ctr.getColor(0)}"></div>
             <div class="colorImage right" ng-style="{'background-color':ctr.getColor(1)}"></div>
 
+            <div class="versusIcon"></div>
+
             <div class="info">
 
               <div class="player left">
@@ -264,10 +266,10 @@
                   </div>
                 </div>
 
-                <div class="image" ng-style="{'background-image':'url('+ctr.getTagInfo(0).avatar+')'}"></div>
+                <a class="image" ng-href="{{ctr.getTagInfo(0).tag_url}}" target="_blank" ng-style="{'background-image':'url('+ctr.getTagInfo(0).avatar+')'}"></a>
                 <div class="country">
-                  <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(0).flag.flag_code"></span>
-                  <span class="title" ng-bind="ctr.getTagInfo(0).flag.flag_country"></span>
+                  <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(0).flag_short"></span>
+                  <span class="title" ng-bind="ctr.getTagInfo(0).flag_country"></span>
                 </div>
                 <h1>
                 <div ng-bind="ctr.getTagInfo(0).player_name"></div>
@@ -294,10 +296,10 @@
                   </div>
                 </div>
 
-                <div class="image" ng-style="{'background-image':'url('+ctr.getTagInfo(1).avatar+')'}"></div>
+                <a class="image" ng-href="{{ctr.getTagInfo(1).tag_url}}" target="_blank" ng-style="{'background-image':'url('+ctr.getTagInfo(1).avatar+')'}"></a>
                 <div class="country">
-                  <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(1).flag.flag_code"></span>
-                  <span class="title" ng-bind="ctr.getTagInfo(1).flag.flag_country"></span>
+                  <span class="flag" class="flag-icon" flag-icon="ctr.getTagInfo(1).flag_short"></span>
+                  <span class="title" ng-bind="ctr.getTagInfo(1).flag_country"></span>
                 </div>
                 <h1>
                 <div ng-bind="ctr.getTagInfo(1).player_name"></div>
@@ -340,7 +342,7 @@
             </div>
 
           </div>
-          <div  custom-sorting-list="ctr.sortingList" set-new-list="ctr.setNewSortingList(list)" collect-param="ctr.currentUnix">
+          <div custom-sorting-list="ctr.sortingList" set-new-list="ctr.setNewSortingList(list)" collect-param="ctr.currentUnix">
             <div class="table" ui-sortable="ctr.sortableOptions">
 
               <section class="stata std" ng-class="{'smalli':ctr.sectionIsBanned('matches_count')}" data-panel-name="Матчи" data-panel-id="matches_count">
