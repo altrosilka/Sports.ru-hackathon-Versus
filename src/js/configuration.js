@@ -1,4 +1,6 @@
 angular.module('App')
+  //.constant('__storagePath', 'http://hack03.sports.ru/s5o/source/infographic/')
+  .constant('__storagePath', '')
   .constant('__introDomain', location.protocol + '//' + location.host)
   .constant('__api', {
     base: 'http://www.sports.ru',

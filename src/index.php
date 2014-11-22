@@ -11,10 +11,10 @@ function get_data($url) {
   return $data;
 }
 
-$host = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'];
+$host = 'http://'.$_SERVER['SERVER_NAME'];
 
 $title = 'Инфографика | Sports.ru';
-$description = 'Инфографика по всем турнирам и сезонам для всех футбольных бомбардиров от sports.ru!';
+$description = 'Инфографика о ваших любимых игроках во всех турнирах от sports.ru!';
 $image = $host.'/infographic/images/soc.png';
 
 if (isset($_GET['info'])){
@@ -47,10 +47,10 @@ if (isset($_GET['info'])){
   <base href="@@baseUrl" target="_blank" />
   <meta charset="UTF-8"> 
   <title><?=$title?></title>
-  <link rel="stylesheet" href="pack/vendors.css?v=@@version">
-  <link rel="stylesheet" href="pack/styles.css?v=@@version">
+  <link rel="stylesheet" href="@@remotepack/vendors.css?v=@@version">
+  <link rel="stylesheet" href="@@remotepack/styles.css?v=@@version">
  
-  <meta property="og:site_name" content="lazymall.ru" />
+  <meta property="og:site_name" content="<?=$host?>" />
   <meta property="og:image" content="<?=$image?>" />
   <meta property="og:title" content="<?=$title?>" />
   <meta property="og:type" content="website" />
@@ -79,8 +79,8 @@ if (isset($_GET['info'])){
   <div class="plat" ng-class="{'lowIndex':ctr.lowIndex, 'hideView':ctr.hideView}">
     <section class="view" ui-view=""></section>
   </div>
-  <script type="text/javascript" src="pack/vendor.js?v=@@version"></script>
-  <script type="text/javascript" src="pack/templates.js?v=@@version"></script>
-  <script type="text/javascript" src="pack/scripts.js?v=@@version"></script>
+  <script type="text/javascript" src="@@remotepack/vendor.js?v=@@version"></script>
+  <script type="text/javascript" src="@@remotepack/templates.js?v=@@version"></script>
+  <script type="text/javascript" src="@@remotepack/scripts.js?v=@@version"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 angular.module('App')
-  .service('S_utils', ['$q', '$modal', '__api', function($q, $modal, __api) {
+  .service('S_utils', ['$q', '$modal', '__api', '__storagePath', function($q, $modal, __api, __storagePath) {
     var service = {};
 
     service.loadImage = function(src) {
@@ -35,19 +35,19 @@ angular.module('App')
 
     service.getVersusBackgrounds = function() {
       return [{
-        url: 'images/versus-bg/fvs01.png'
+        url: __storagePath+'images/versus-bg/fvs01.png'
       }, {
-        url: 'images/versus-bg/fvs02.png'
+        url: __storagePath+'images/versus-bg/fvs02.png'
       }, {
-        url: 'images/versus-bg/fvs03.png'
+        url: __storagePath+'images/versus-bg/fvs03.png'
       }, {
-        url: 'images/versus-bg/fvs04.png'
+        url: __storagePath+'images/versus-bg/fvs04.png'
       }, {
-        url: 'images/versus-bg/fvs05.png'
+        url: __storagePath+'images/versus-bg/fvs05.png'
       }, {
-        url: 'images/versus-bg/fvs06.png'
+        url: __storagePath+'images/versus-bg/fvs06.png'
       }, {
-        url: 'images/versus-bg/fvs07.png'
+        url: __storagePath+'images/versus-bg/fvs07.png'
       }];
     }
 

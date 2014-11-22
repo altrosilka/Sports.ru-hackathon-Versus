@@ -111,10 +111,40 @@ gulp.task('create-index', function() {
       }, {
         match: 'baseUrl',
         replacement: '/'+BASE+'/'
+      }, {
+        match: 'remote',
+        replacement: ''
       }]
     }))
     .pipe(gulp.dest('./public/'+BASE));
 });
+
+
+gulp.task('create-index-deploy', function() {
+  var pkg = getPackageJson();
+  var version = pkg.version;
+
+  gulp.src('./src/index.php')
+    .pipe(replace({
+      patterns: [{
+        match: 'date',
+        replacement: moment().format('DD.MM.YYYY')
+      }, {
+        match: 'version',
+        replacement: version
+      }, {
+        match: 'baseUrl',
+        replacement: '/'+BASE+'/'
+      }, {
+        match: 'remote',
+        replacement: 'http://hack03.sports.ru/s5o/source/infographic/'
+      }]
+    }))
+    .pipe(gulp.dest('./public/'+BASE));
+});
+
+
+http://hack03.sports.ru/s5o/source/infographic/pack/styles.css
 
 gulp.task('build', [
     'less',
@@ -148,8 +178,6 @@ function inc(type) {
       version: newVer
     }))
     .pipe(gulp.dest('./'));
-
-
 }
 
 gulp.task('patch', function() {

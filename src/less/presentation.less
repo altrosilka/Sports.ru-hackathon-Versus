@@ -28,13 +28,38 @@
         top: 0;
         bottom: 0;
         background-color: #000;
-        opacity: 0.7;
+        opacity: 0.85;
+        transition: 0.4s;
       }
       &.go {
         opacity: 0;
         visibility: hidden;
         transform: translateY(1400px);
-
+      }
+      &.p {
+        span {
+          background-color: #a066aa;
+        }
+      }
+      &.b {
+        span {
+          background-color: #00aeef;
+        }
+      }
+      &.g {
+        span {
+          background-color: #0db14b;
+        }
+      }
+      &.y {
+        span {
+          background-color: #ffcb05;
+        }
+      }
+      &.r {
+        span {
+          background-color: #ed1651;
+        }
       }
     }
   }
@@ -45,6 +70,6 @@
     visibility: hidden;
   }
 }
-body[data-state="index"] .presentation{
+body[data-state="index"] .presentation {
   display: block;
 }
